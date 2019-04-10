@@ -9,9 +9,9 @@ package gestaodefuncionariosdesupermercados;
  *
  * @author Francisco Cordeiro
  */
-public abstract class Funcionarios {
+public abstract class Diretor {
     
-    public Funcionarios(String nome, String estatuto, String ncontribuinte, String telemovel, String nib, double salario, double  horas) {
+    public Diretor(String nome, String estatuto, String ncontribuinte, String telemovel, String nib, double salario, double  horas) {
         this.nome = nome; 
         this.estatuto = estatuto;
         this.ncontribuinte = ncontribuinte;
@@ -21,7 +21,7 @@ public abstract class Funcionarios {
         this.horas=horas;
     }
     
-    public Funcionarios() {
+    public Diretor() {
         this("","","","","",0.0,0.0);
     }
     
@@ -96,9 +96,4 @@ public abstract class Funcionarios {
                 "Horas de Trabalho: "+horas+"\n"+linha;
         return output;
     }
-
-    
-    
-    
-    
 }

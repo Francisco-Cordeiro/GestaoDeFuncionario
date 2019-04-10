@@ -18,17 +18,12 @@ public class GestaoDeFuncionariosDeSupermercados {
      */
     public static void main(String[] args) {
         
-        GestaoFuncionarios f = new GestaoFuncionarios();
+        GestaoFuncionarios s = new GestaoFuncionarios();
         
-        f.inserirFuncionario("João", "Diretor", "230453759", "936458109", "PT500345752956", (float)3000.00);
-        Funcionarios funcionarios = new  Funcionarios("Francisco Cordeiro", "Sub-Diretor", "232015883", "967386122" ,"PT500345252961", (float)1500.00);
-        f.inseriFuncionario(funcionarios);
-        ArrayList<Funcionarios> t = f.gettFuncionarios();
-        for(Funcionarios a:t){
-            System.out.println(""+a.toString());
-        }
-        System.out.println("Pesquisa o nome João: \n"+f.pesquisaNome("João"));
-        System.out.println("Pesquisar o número de contribuinte: \n"+f.pesquisarNcontribuinte("232015883"));
+        s.inserirFuncionario("João", "Funcionario", "24987667", "963425456", "PT501265324578912", 1000, 8);
+        System.out.println(""+s.verFuncionario());
+        s.inserirDiretor("Fracisco Cordeiro", "Diretor", "43908778", "963452747","PT5019621327573912", 3000, 5);
+        System.out.println(""+s.verDiretor());
     }
     
 }
