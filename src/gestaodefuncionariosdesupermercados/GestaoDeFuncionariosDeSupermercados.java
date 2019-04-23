@@ -16,7 +16,7 @@ public class GestaoDeFuncionariosDeSupermercados {
     public static void main(String[] args) {
         
         GestaoFuncionarios s = new GestaoFuncionarios();
-        
+
         s.inserirDiretor("Francisco Cordeiro", "Diretor", "43908778", "963452747","PT5019621327573912", 3000, 5.0);
         System.out.println(s.verDiretor());
         s.inserirSubDiretor("Maria", "SubDiretor", "43908778", "963452747","PT50196213232573912", 2000, 5.0);
@@ -25,7 +25,7 @@ public class GestaoDeFuncionariosDeSupermercados {
         System.out.println(s.verFuncionario());
         
         System.out.println("Pesquisa o estatuto: \n"+s.pesquisarEstatuto("Diretor"));
-        
+
     }
     
 }

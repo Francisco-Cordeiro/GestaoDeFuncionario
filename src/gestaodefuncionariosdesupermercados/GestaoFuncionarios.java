@@ -18,14 +18,14 @@ public class GestaoFuncionarios {
     public GestaoFuncionarios() {
         
         tDiretor = new ArrayList<>();
-        tSubDiretors = new ArrayList<>();
+        tSubDiretores = new ArrayList<>();
         tFuncionarios = new ArrayList<>();
         tTodos = new ArrayList<>();
     }
 
     private ArrayList<Funcionarios> tFuncionarios;
     private ArrayList<Diretor> tDiretor;
-    private ArrayList<SubDiretor> tSubDiretors;
+    private ArrayList<SubDiretor> tSubDiretores;
     private ArrayList<GestaoTodos> tTodos;
 
     public void inserirDiretor(String nome, String estatuto,
@@ -58,7 +58,7 @@ public class GestaoFuncionarios {
 
     public void inserirSubDiretor(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
-        tSubDiretors.add(new SubDiretor(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
+        tSubDiretores.add(new SubDiretor(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
             @Override
             public int bonusPorHora() {
                 double bonusHora = 0.0;
@@ -110,6 +110,7 @@ public class GestaoFuncionarios {
         });
     }
 
+
     public String verDiretor() {
         String output = "";
         for (int i = 0; i < tDiretor.size(); i++) {
@@ -121,9 +122,9 @@ public class GestaoFuncionarios {
 
     public String verSubDiretor() {
         String output = "";
-        for (int i = 0; i < tSubDiretors.size(); i++) {
+        for (int i = 0; i < tSubDiretores.size(); i++) {
 
-            output = tSubDiretors.get(i).toString();
+            output = tSubDiretores.get(i).toString();
         }
         return output;
     }
@@ -149,7 +150,7 @@ public class GestaoFuncionarios {
         return output;
     }
     
-     public String pesquisarSalario(double salariop){
+    public String pesquisarSalario(double salariop){
         String output = "Salário NÃO encontrado!\n";
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
@@ -159,7 +160,7 @@ public class GestaoFuncionarios {
         }
         return output;
     }
-    
+   
     //pesquisa por estatuto
     public String pesquisarEstatuto(String estatutop){
         String output = "Estatuto NÃO encontrado!\n";
@@ -171,6 +172,7 @@ public class GestaoFuncionarios {
         }
         return output;
     }
+
     
      public String pesquisarNcontribuinte(String ncontribuintep){
         String output = "Número de contribuinte NÃO encontrado!\n";
@@ -181,7 +183,8 @@ public class GestaoFuncionarios {
             }
         }
         return output;
-    }
+     }
+     
     //pesquisa por nib
     public String pesquisarNib(String nibp){
          String output = "Nib NÃO encontrado!\n";
@@ -234,11 +237,11 @@ public class GestaoFuncionarios {
     }
 
     public ArrayList<SubDiretor> gettSubDiretors() {
-        return tSubDiretors;
+        return tSubDiretores;
     }
 
     public void settSubDiretors(ArrayList<SubDiretor> tSubDiretors) {
-        this.tSubDiretors = tSubDiretors;
+        this.tSubDiretores = tSubDiretors;
     }
 
     public ArrayList<GestaoTodos> gettTodos() {
@@ -248,8 +251,5 @@ public class GestaoFuncionarios {
     public void settTodos(ArrayList<GestaoTodos> tTodos) {
         this.tTodos = tTodos;
     }
-    
-    
-    
-    
+
 }

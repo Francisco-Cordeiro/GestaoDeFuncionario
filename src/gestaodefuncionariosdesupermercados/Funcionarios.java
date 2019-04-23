@@ -9,6 +9,7 @@ package gestaodefuncionariosdesupermercados;
  *
  * @author Francisco Cordeiro
  */
+
 public abstract class Funcionarios implements GestaoTodos{
     
     public Funcionarios(String nome, String estatuto, String ncontribuinte, String telemovel, String nib, double salario, double  horas) {
@@ -27,7 +28,7 @@ public abstract class Funcionarios implements GestaoTodos{
     
     public abstract int bonusPorHora();
     public abstract String toString();
-    
+
     private String nome;
     private String estatuto;
     private String ncontribuinte;
@@ -87,7 +88,7 @@ public abstract class Funcionarios implements GestaoTodos{
     public double getHoras() {
         return horas;
     }
-
+    
     public void setHoras(double horas) {
         this.horas = horas;
     }
