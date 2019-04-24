@@ -22,7 +22,7 @@ public class GestaoFuncionarios {
     private ArrayList<GestaoTodos> tTodos;
 
     
-    public void inserirDiretor(String nome, String estatuto,
+    public void inserirTodos(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
         tTodos.add(new Diretor(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
             @Override
@@ -50,7 +50,7 @@ public class GestaoFuncionarios {
         });
     }
 
-    public void inserirSubDiretor(String nome, String estatuto,
+    public void inserirTodos1(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
         tTodos.add(new SubDiretor(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
             @Override
@@ -77,7 +77,7 @@ public class GestaoFuncionarios {
         });
     }
 
-    public void inserirFuncionario(String nome, String estatuto,
+    public void inserirTodos2(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
         tTodos.add(new Funcionarios(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
             @Override
@@ -131,7 +131,7 @@ public class GestaoFuncionarios {
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
             if (f.getEstatuto().equals(estatutop)){
-                output += f.toString();
+                output = f.toString();
             }
         }
         return output;
@@ -179,7 +179,7 @@ public class GestaoFuncionarios {
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
             if (f.getSalario()==salariop){
-                output += f.toString();
+                output = f.toString();
             }
         }
         return output;
@@ -191,7 +191,18 @@ public class GestaoFuncionarios {
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
             if (f.getHoras()== horasp){
-                output += f.toString();
+                output = f.toString();
+            }
+        }
+        return output;
+    }
+    
+    public String pesquisaSalariosEntreQuotas(double salariomin, double salariomax){
+        String output = "Salários não encontrados!";
+        for(int i =0; i< tTodos.size();i++){
+            GestaoTodos f = tTodos.get(i);
+            if((f.getSalario()>salariomin)&&(f.getSalario()<salariomax)){
+                output = f.toString();   
             }
         }
         return output;
