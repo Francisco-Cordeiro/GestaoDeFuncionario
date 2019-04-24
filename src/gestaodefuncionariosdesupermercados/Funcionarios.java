@@ -27,6 +27,7 @@ public abstract class Funcionarios implements GestaoTodos{
     }
     
     public abstract int bonusPorHora();
+    @Override
     public abstract String toString();
 
     private String nome;
@@ -45,6 +46,7 @@ public abstract class Funcionarios implements GestaoTodos{
         this.nome = nome;
     }
 
+    @Override
     public String getEstatuto() {
         return estatuto;
     }
@@ -53,6 +55,7 @@ public abstract class Funcionarios implements GestaoTodos{
         this.estatuto = estatuto;
     }
 
+    @Override
     public String getNcontribuinte() {
         return ncontribuinte;
     }
@@ -61,6 +64,7 @@ public abstract class Funcionarios implements GestaoTodos{
         this.ncontribuinte = ncontribuinte;
     }
 
+    @Override
     public String getTelemovel() {
         return telemovel;
     }
@@ -69,6 +73,7 @@ public abstract class Funcionarios implements GestaoTodos{
         this.telemovel = telemovel;
     }
 
+    @Override
     public String getNib() {
         return nib;
     }
@@ -77,6 +82,7 @@ public abstract class Funcionarios implements GestaoTodos{
         this.nib = nib;
     }
 
+    @Override
     public double getSalario() {
         return salario;
     }
@@ -85,6 +91,7 @@ public abstract class Funcionarios implements GestaoTodos{
         this.salario = salario;
     }
 
+    @Override
     public double getHoras() {
         return horas;
     }
