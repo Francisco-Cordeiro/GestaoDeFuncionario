@@ -21,73 +21,17 @@ public class GestaoFuncionarios {
     //variasveis
     private ArrayList<GestaoTodos> tTodos;
 
-    public void inserirTodos(String nome, String estatuto,
-            String ncontribuinte, String telemovel, String nib, double salario, double horas) {
-        tTodos.add(new Diretor(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
-            @Override
-            public int bonusPorHora() {
-                double bonusHora = 0;
-                double salarioTotal = 0;
-                bonusHora = 5.0 * horas;
-                salarioTotal = salario + bonusHora;
-                return (int) (double) salarioTotal;
-
-            }
-
-            @Override
-            public String toString() {
-                StringBuilder output = new StringBuilder();
-                output.append("Nome: ").append(this.getNome()).append("\n");
-                output.append("Eatatuto: " + this.getEstatuto() + "\n");
-                output.append("Numero de contribuinte: " + this.getNcontribuinte() + "\n");
-                output.append("Telemóvel: " + this.getTelemovel() + "\n");
-                output.append("NIB: " + this.getNib() + "\n");
-                output.append("Salário: " + this.bonusPorHora() + "\n");
-                output.append("Horas Extra: ").append(this.getHoras()).append("\n");;
-                return output.toString();
-            }
-        });
-    }
-
-    public void inserirTodos1(String nome, String estatuto,
-            String ncontribuinte, String telemovel, String nib, double salario, double horas) {
-        tTodos.add(new SubDiretor(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
-            @Override
-            public int bonusPorHora() {
-                double bonusHora = 0.0;
-                double salarioTotal = 0.0;
-                bonusHora = 10.0 * horas;
-                salarioTotal = salario + bonusHora;
-                return (int) (double) salarioTotal;
-            }
-
-            @Override
-            public String toString() {
-                StringBuilder output = new StringBuilder();
-                output.append("Nome: ").append(this.getNome()).append("\n");
-                output.append("Eatatuto: " + this.getEstatuto() + "\n");
-                output.append("Numero de contribuinte: " + this.getNcontribuinte() + "\n");
-                output.append("Telemóvel: " + this.getTelemovel() + "\n");
-                output.append("NIB: " + this.getNib() + "\n");
-                output.append("Salário: " + this.bonusPorHora() + "\n");
-                output.append("Horas Extra: ").append(this.getHoras()).append("\n");;
-                return output.toString();
-            }
-        });
-    }
-
-    public void inserirTodos2(String nome, String estatuto,
+    public void inserirFuncionarios(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
         tTodos.add(new Funcionarios(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
-            @Override
-            public int bonusPorHora() {
-                double bonusHora = 0.0;
-                double salarioTotal = 0.0;
-                bonusHora = 15.0 * horas;
+            public double bonusPorHoraF() {
+                double bonusHora = 0.00;
+                double salarioTotal = 0.00;
+                bonusHora = 5.0 * horas;
                 salarioTotal = salario + bonusHora;
-                return (int) (double) salarioTotal;
+                return salarioTotal;
             }
-
+            
             @Override
             public String toString() {
                 StringBuilder output = new StringBuilder();
@@ -96,10 +40,12 @@ public class GestaoFuncionarios {
                 output.append("Numero de contribuinte: " + this.getNcontribuinte() + "\n");
                 output.append("Telemóvel: " + this.getTelemovel() + "\n");
                 output.append("NIB: " + this.getNib() + "\n");
-                output.append("Salário: " + this.bonusPorHora() + "\n");
-                output.append("Horas Extra: ").append(this.getHoras()).append("\n");;
+                output.append("Salário : ").append(this.getSalario()).append("€\n");
+                output.append("Horas Extra: ").append(this.getHoras()).append("\n");
+                output.append("Salário com bonus: ").append(this.bonusPorHoraF()).append("€\n");
                 return output.toString();
             }
+            
         });
     }
 
@@ -118,7 +64,7 @@ public class GestaoFuncionarios {
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
             if (f.getNome().equalsIgnoreCase(nomep)) {
-                 output = f.toString();
+                output = f.toString();
                 existe = true;
             }
         }
@@ -213,35 +159,28 @@ public class GestaoFuncionarios {
 
     //pesquisa por horas feitas
     public String pesquisarHoras(double horasp) {
-        String output = "";
-        boolean existe = false;
+        String output = "Horas extras não feitas!\n";
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
             if (f.getHoras() == horasp) {
-                output = f.getNome()+" : "+f.getHoras() + "\n";
+                output += f.getNome()+" : "+f.getHoras()+" horas "+ "\n";
             }
-        }
-        if (!existe){
-            output = "Horas extras não feitas!\n";
-        }
+        }   
+        
         return output;
     }
 
     public String pesquisaSalariosEntreDoisSalarios(double salariomin, double salariomax) {
         String output = "";
-        boolean existe = false;
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
             if ((f.getSalario() > salariomin) && (f.getSalario() < salariomax)) {
-                output = f.getNome()+" : "+f.getSalario() + "\n";
+                output += f.getNome()+" : "+f.getSalario() + "\n";
             }
-        }
-        if (!existe){
-            output = "Salários não encontrados!\n";
         }
         return output;
     }
-
+    
     //gets e sets do array
     public ArrayList<GestaoTodos> gettTodos() {
         return tTodos;

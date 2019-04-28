@@ -23,10 +23,10 @@ public abstract class Funcionarios implements GestaoTodos{
     }
     
     public Funcionarios() {
-        this("","","","","",0.0,0.0);
+        this("","","","","",0.00,0.00);
     }
     
-    public abstract int bonusPorHora();
+    public abstract double bonusPorHoraF();
     @Override
     public abstract String toString();
 

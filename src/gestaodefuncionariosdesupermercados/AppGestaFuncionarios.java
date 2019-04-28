@@ -5,6 +5,7 @@
  */
 package gestaodefuncionariosdesupermercados;
 
+
 /**
  *
  * @author Francisco Cordeiro
@@ -27,8 +28,72 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jDialogInserirFunc = new javax.swing.JDialog();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldNome = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxEstatuto = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemSair = new javax.swing.JMenuItem();
+        jMenuInserir = new javax.swing.JMenu();
+        jMenuItemInserirFunc = new javax.swing.JMenuItem();
+        jMenuVer = new javax.swing.JMenu();
+        jMenuItemVerTabela = new javax.swing.JMenuItem();
+        jMenuPesquisar = new javax.swing.JMenu();
+        jMenuItemPesqNome = new javax.swing.JMenuItem();
+
+        jMenu4.setText("File");
+        jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("Edit");
+        jMenuBar2.add(jMenu5);
+
+        jDialogInserirFunc.setMinimumSize(new java.awt.Dimension(866, 535));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Nome:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Estatuto:");
+
+        jComboBoxEstatuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha um--" }));
+
+        javax.swing.GroupLayout jDialogInserirFuncLayout = new javax.swing.GroupLayout(jDialogInserirFunc.getContentPane());
+        jDialogInserirFunc.getContentPane().setLayout(jDialogInserirFuncLayout);
+        jDialogInserirFuncLayout.setHorizontalGroup(
+            jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(267, Short.MAX_VALUE))
+        );
+        jDialogInserirFuncLayout.setVerticalGroup(
+            jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(404, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,8 +109,48 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("Aplicação");
+
+        jMenuItemSair.setText("Sair");
+        jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemSair);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenuInserir.setText("Inserir Tudo");
+
+        jMenuItemInserirFunc.setText("Inserir Funcionarios");
+        jMenuItemInserirFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInserirFuncActionPerformed(evt);
+            }
+        });
+        jMenuInserir.add(jMenuItemInserirFunc);
+
+        jMenuBar1.add(jMenuInserir);
+
+        jMenuVer.setText("Ver Tudo");
+
+        jMenuItemVerTabela.setText("Ver Tabela");
+        jMenuVer.add(jMenuItemVerTabela);
+
+        jMenuBar1.add(jMenuVer);
+
+        jMenuPesquisar.setText("Pesquisar Tudo");
+
+        jMenuItemPesqNome.setText("Pesquisar Nome");
+        jMenuPesquisar.add(jMenuItemPesqNome);
+
+        jMenuBar1.add(jMenuPesquisar);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,6 +171,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemSairActionPerformed
+
+    private void jMenuItemInserirFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInserirFuncActionPerformed
+        jDialogInserirFunc.setVisible(true);
+    }//GEN-LAST:event_jMenuItemInserirFuncActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,7 +216,24 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBoxEstatuto;
+    private javax.swing.JDialog jDialogInserirFunc;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenu jMenuInserir;
+    private javax.swing.JMenuItem jMenuItemInserirFunc;
+    private javax.swing.JMenuItem jMenuItemPesqNome;
+    private javax.swing.JMenuItem jMenuItemSair;
+    private javax.swing.JMenuItem jMenuItemVerTabela;
+    private javax.swing.JMenu jMenuPesquisar;
+    private javax.swing.JMenu jMenuVer;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
 }
