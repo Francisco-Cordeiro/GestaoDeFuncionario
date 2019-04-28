@@ -28,9 +28,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
         jDialogInserirFunc = new javax.swing.JDialog();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
@@ -47,12 +44,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jMenuItemVerTabela = new javax.swing.JMenuItem();
         jMenuPesquisar = new javax.swing.JMenu();
         jMenuItemPesqNome = new javax.swing.JMenuItem();
-
-        jMenu4.setText("File");
-        jMenuBar2.add(jMenu4);
-
-        jMenu5.setText("Edit");
-        jMenuBar2.add(jMenu5);
 
         jDialogInserirFunc.setMinimumSize(new java.awt.Dimension(866, 535));
 
@@ -222,10 +213,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMenuInserir;
     private javax.swing.JMenuItem jMenuItemInserirFunc;
     private javax.swing.JMenuItem jMenuItemPesqNome;
