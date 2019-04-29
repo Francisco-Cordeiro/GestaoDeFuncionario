@@ -12,12 +12,12 @@ package gestaodefuncionariosdesupermercados;
 
 public abstract class Funcionarios implements GestaoTodos{
     
-    public Funcionarios(String nome, String estatuto, String ncontribuinte, String telemovel, String nib, double salario, double  horas) {
+    public Funcionarios(String nome, String estatuto, String ncontribuinte, String telemovel, String iban, double salario, double  horas) {
         this.nome = nome; 
         this.estatuto = estatuto;
         this.ncontribuinte = ncontribuinte;
         this.telemovel = telemovel;
-        this.nib = nib;
+        this.iban = iban;
         this.salario= salario;
         this.horas=horas;
     }
@@ -34,7 +34,7 @@ public abstract class Funcionarios implements GestaoTodos{
     private String estatuto;
     private String ncontribuinte;
     private String telemovel;
-    private String nib;
+    private String iban;
     private double salario;
     private double horas;
 
@@ -75,11 +75,11 @@ public abstract class Funcionarios implements GestaoTodos{
 
     @Override
     public String getNib() {
-        return nib;
+        return iban;
     }
 
-    public void setNib(String nib) {
-        this.nib = nib;
+    public void setNib(String iban) {
+        this.iban = iban;
     }
 
     @Override

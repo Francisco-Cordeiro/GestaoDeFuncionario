@@ -110,12 +110,12 @@ public class GestaoFuncionarios {
     }
 
     //pesquisa por nib
-    public String pesquisarNib(String nibp) {
+    public String pesquisarIban(String ibanp) {
         String output = "";
         boolean existe = false;
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
-            if (f.getNib().equalsIgnoreCase(nibp)) {
+            if (f.getNib().equalsIgnoreCase(ibanp)) {
                 output = f.getNome()+" : "+f.getNib() + "\n";
             }
         }
