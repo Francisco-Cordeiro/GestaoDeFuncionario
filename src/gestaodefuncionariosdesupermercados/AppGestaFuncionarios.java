@@ -10,9 +10,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 
 
 /**
@@ -25,9 +27,47 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
      * Creates new form AppGestaFuncionarios
      */
     public AppGestaFuncionarios() {
+        try {
+            formatter1 = new MaskFormatter("#########");//nc
+            formatter2 = new MaskFormatter("#########");//tele
+            formatter3 = new MaskFormatter("AA## #### #### ########### ##");//IBAN
+        } catch (ParseException ex) {
+            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
     }
 
+    private MaskFormatter criarFormato1(String s){
+        MaskFormatter formatter1 = null;
+        try {
+            formatter1 = new MaskFormatter(s);
+        } catch (ParseException ex) {
+            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return formatter1;
+    }
+        
+    private MaskFormatter criarFormato2(String d){
+        MaskFormatter formatter2 = null;
+        try {
+            formatter2 = new MaskFormatter(d);
+        } catch (ParseException ex) {
+            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return formatter2;
+    }
+    
+    private MaskFormatter criarFormato3(String e){
+        MaskFormatter formatter3 = null;
+        try {
+            formatter3 = new MaskFormatter(e);
+        } catch (ParseException ex) {
+            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return formatter3;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,18 +81,18 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabelNome = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabelEstatuto = new javax.swing.JLabel();
-        jComboBoxEstatuto = new javax.swing.JComboBox<>();
-        jLabelNContribuinte = new javax.swing.JLabel();
-        jTextFieldNumContribuinte = new javax.swing.JTextField();
+        jComboBoxEstatutos = new javax.swing.JComboBox<>();
+        jLabelNúmeroDeContribuinte = new javax.swing.JLabel();
+        jFormattedTextFieldNumContribuinte = new javax.swing.JFormattedTextField(formatter1);
         jLabelTelemovel = new javax.swing.JLabel();
-        jTextFieldTelemovel = new javax.swing.JTextField();
+        jFormattedTextFieldTelemovel = new javax.swing.JFormattedTextField(formatter2);
         jLabelIBAN = new javax.swing.JLabel();
-        jTextFieldIBAN = new javax.swing.JTextField();
+        jFormattedTextFieldIBAN = new javax.swing.JFormattedTextField(formatter3);
         jLabelSalário = new javax.swing.JLabel();
-        jTextFieldSalário = new javax.swing.JTextField();
         jLabelHoras = new javax.swing.JLabel();
         jTextFieldHoras = new javax.swing.JTextField();
         jButtonInserir = new javax.swing.JButton();
+        jTextFieldSalario = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -65,35 +105,29 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jMenuPesquisar = new javax.swing.JMenu();
         jMenuItemPesqNome = new javax.swing.JMenuItem();
 
-        jDialogInserirFunc.setMinimumSize(new java.awt.Dimension(866, 560));
+        jDialogInserirFunc.setMinimumSize(new java.awt.Dimension(870, 570));
 
         jLabelNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNome.setText("Nome:");
 
+        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomeActionPerformed(evt);
+            }
+        });
+
         jLabelEstatuto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelEstatuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelEstatuto.setText("Estatuto:");
 
-        jComboBoxEstatuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Escolha um--" }));
-        jComboBoxEstatuto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxEstatutoActionPerformed(evt);
-            }
-        });
-
-        jLabelNContribuinte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelNContribuinte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelNContribuinte.setText("Número de Contribuinte:");
-        jLabelNContribuinte.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabelNContribuinte.setMaximumSize(new java.awt.Dimension(57, 17));
-        jLabelNContribuinte.setMinimumSize(new java.awt.Dimension(57, 17));
-        jLabelNContribuinte.setName(""); // NOI18N
+        jLabelNúmeroDeContribuinte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelNúmeroDeContribuinte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNúmeroDeContribuinte.setText("Número de Contribuinte:");
 
         jLabelTelemovel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelTelemovel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTelemovel.setText("Telemovel: ");
-        jLabelTelemovel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelTelemovel.setText("Telemovel:");
 
         jLabelIBAN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelIBAN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -131,17 +165,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
-                                .addComponent(jLabelTelemovel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
-                                .addComponent(jLabelNContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
                                 .addComponent(jLabelEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboBoxEstatutos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
                                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelSalário)
@@ -149,14 +175,22 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                                     .addComponent(jLabelHoras))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldSalário, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jFormattedTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
                                 .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldNumContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 265, Short.MAX_VALUE)))
+                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
+                                .addComponent(jLabelTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextFieldTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
+                                .addComponent(jLabelNúmeroDeContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextFieldNumContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jDialogInserirFuncLayout.setVerticalGroup(
@@ -165,27 +199,27 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
-                    .addComponent(jTextFieldNumContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(jComboBoxEstatutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(jLabelNúmeroDeContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldNumContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTelemovel)
-                    .addComponent(jTextFieldTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(jLabelTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelIBAN)
-                    .addComponent(jTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSalário)
-                    .addComponent(jTextFieldSalário, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelHoras)
@@ -277,61 +311,56 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSairActionPerformed
 
     private void jMenuItemInserirFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInserirFuncActionPerformed
+        lerEstatutosBDJComboBox();
         jDialogInserirFunc.setVisible(true);
     }//GEN-LAST:event_jMenuItemInserirFuncActionPerformed
-
-    private void jComboBoxEstatutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstatutoActionPerformed
-        lerEstatutosBDJComboBox();
-    }//GEN-LAST:event_jComboBoxEstatutoActionPerformed
 
     private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
         limpaCampos();
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
-    
-    
+    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
+        
+    }//GEN-LAST:event_jTextFieldNomeActionPerformed
     
    private void lerEstatutosBDJComboBox(){
-        String url = "jdbc:sqlite:BDGestaoDeFuncionarios.db";
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
-
-        
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
         try {
             con = DriverManager.getConnection(url);
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from Estatutos order by estatuto");
+            ResultSet rs = stmt.executeQuery("select * from Estatutos order by Nome");
 
-            jComboBoxEstatuto.removeAllItems();
-            jComboBoxEstatuto.addItem("-- Escolha o estatuto --");
+            jComboBoxEstatutos.removeAllItems();
+            jComboBoxEstatutos.addItem("-- Escolha o estatuto --");
             while (rs.next()) {
-                String estatuto = rs.getString("Estatutos");
-                jComboBoxEstatuto.addItem(estatuto);
+                String estatuto = rs.getString("Nome");
+                jComboBoxEstatutos.addItem(estatuto);
             }
             stmt.close();
             con.close();
-
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
     }
    
-   private void limpaCampos(){
+    private void limpaCampos(){
         jTextFieldNome.setText("");
-        jComboBoxEstatuto.setSelectedIndex(0);
-        jLabelNContribuinte.setText("");
-        jLabelTelemovel.setText("");
-        jTextFieldIBAN.setText("");
-        jTextFieldSalário.setText("");
-        jTextFieldHoras.setToolTipText("");
+        jComboBoxEstatutos.setSelectedIndex(0);
+        jFormattedTextFieldNumContribuinte.setText("");
+        jFormattedTextFieldTelemovel.setText("");
+        jFormattedTextFieldIBAN.setText("");
+        jTextFieldSalario.setText("");
+        jTextFieldHoras.setText("");
     }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -367,16 +396,20 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonInserir;
-    private javax.swing.JComboBox<String> jComboBoxEstatuto;
+    private javax.swing.JComboBox<String> jComboBoxEstatutos;
     private javax.swing.JDialog jDialogInserirFunc;
+    private javax.swing.JFormattedTextField jFormattedTextFieldIBAN;
+    private javax.swing.JFormattedTextField jFormattedTextFieldNumContribuinte;
+    private javax.swing.JFormattedTextField jFormattedTextFieldTelemovel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelEstatuto;
     private javax.swing.JLabel jLabelHoras;
     private javax.swing.JLabel jLabelIBAN;
-    private javax.swing.JLabel jLabelNContribuinte;
     private javax.swing.JLabel jLabelNome;
+    private javax.swing.JLabel jLabelNúmeroDeContribuinte;
     private javax.swing.JLabel jLabelSalário;
     private javax.swing.JLabel jLabelTelemovel;
     private javax.swing.JMenu jMenu1;
@@ -390,12 +423,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuVer;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldHoras;
-    private javax.swing.JTextField jTextFieldIBAN;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldNumContribuinte;
-    private javax.swing.JTextField jTextFieldSalário;
-    private javax.swing.JTextField jTextFieldTelemovel;
+    private javax.swing.JTextField jTextFieldSalario;
     // End of variables declaration//GEN-END:variables
 
-    GestaoFuncionarios func = new GestaoFuncionarios();
+    GestaoFuncionarios f = new GestaoFuncionarios();
+    MaskFormatter formatter1;
+    MaskFormatter formatter2;
+    MaskFormatter formatter3;
+    
 }
