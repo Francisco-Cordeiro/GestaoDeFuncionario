@@ -26,7 +26,7 @@ public abstract class Funcionarios implements GestaoTodos{
         this("","","","","",0.00,0.00);
     }
     
-    public abstract double bonusPorHoraF();
+    public abstract double bonusPorHora();
     @Override
     public abstract String toString();
 
@@ -74,11 +74,11 @@ public abstract class Funcionarios implements GestaoTodos{
     }
 
     @Override
-    public String getNib() {
+    public String getIBAN() {
         return iban;
     }
 
-    public void setNib(String iban) {
+    public void setIBAN(String iban) {
         this.iban = iban;
     }
 

@@ -15,7 +15,8 @@ public interface GestaoTodos {
     String getEstatuto();
     String getNcontribuinte();
     String getTelemovel();
-    String getNib();
+    String getIBAN();
     double getSalario();
     double getHoras();
+    double bonusPorHora();
 }

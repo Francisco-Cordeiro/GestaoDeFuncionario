@@ -18,13 +18,14 @@ public class GestaoFuncionarios {
         tTodos = new ArrayList<>();
     }
 
-    //variasveis
+    //variaveis
     private ArrayList<GestaoTodos> tTodos;
 
     public void inserirFuncionarios(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
         tTodos.add(new Funcionarios(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
-            public double bonusPorHoraF() {
+            @Override
+            public double bonusPorHora() {
                 double bonusHora = 0.00;
                 double salarioTotal = 0.00;
                 bonusHora = 5.0 * horas;
@@ -39,10 +40,11 @@ public class GestaoFuncionarios {
                 output.append("Eatatuto: " + this.getEstatuto() + "\n");
                 output.append("Numero de contribuinte: " + this.getNcontribuinte() + "\n");
                 output.append("Telemóvel: " + this.getTelemovel() + "\n");
-                output.append("NIB: " + this.getNib() + "\n");
+                output.append("IBAN: " + this.getIBAN() + "\n");
                 output.append("Salário : ").append(this.getSalario()).append("€\n");
                 output.append("Horas Extra: ").append(this.getHoras()).append("\n");
-                output.append("Salário com bonus: ").append(this.bonusPorHoraF()).append("€\n");
+                output.append("Salário com bonus: ").append(this.bonusPorHora()).append("€\n");
+                output.append("------------").append("\n");
                 return output.toString();
             }
             
@@ -52,7 +54,7 @@ public class GestaoFuncionarios {
     public String verTodos() {
         String output = "";
         for (int i = 0; i < tTodos.size(); i++) {
-            output = tTodos.get(i).toString();
+            output += tTodos.get(i).toString();
         }
         return output;
     }
@@ -64,7 +66,7 @@ public class GestaoFuncionarios {
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
             if (f.getNome().equalsIgnoreCase(nomep)) {
-                output = f.toString();
+                output += f.getNome();
                 existe = true;
             }
         }
@@ -115,8 +117,8 @@ public class GestaoFuncionarios {
         boolean existe = false;
         for (int i = 0; i < tTodos.size(); i++) {
             GestaoTodos f = tTodos.get(i);
-            if (f.getNib().equalsIgnoreCase(ibanp)) {
-                output = f.getNome()+" : "+f.getNib() + "\n";
+            if (f.getIBAN().equalsIgnoreCase(ibanp)) {
+                output = f.getNome()+" : "+f.getIBAN()+ "\n";
             }
         }
         if (!existe){
@@ -189,5 +191,5 @@ public class GestaoFuncionarios {
     public void settTodos(ArrayList<GestaoTodos> tTodos) {
         this.tTodos = tTodos;
     }
-
+    
 }
