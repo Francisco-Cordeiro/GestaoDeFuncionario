@@ -383,7 +383,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         d.inserirFuncionarios(nome, estatuto, ncontribuinte, telemovel, iban, salario, horas);
 
         this.inserirDadosBD();
-
+        System.out.println("nif: "+validaNif(ncontribuinte));
         this.limpaCampos();
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
@@ -415,6 +415,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
+        jTextAreaOutput.setText("");
         jTextAreaOutput.append(d.verTodos());
     }//GEN-LAST:event_AtualizarActionPerformed
 
@@ -482,8 +483,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             String iban = jFormattedTextFieldIBAN.getText();
             double salario = Double.parseDouble(jTextFieldSalario.getText());
             double horas = Double.parseDouble(jTextFieldHoras.getText());
-            d.inserirFuncionarios(nome, estatuto, iban, nome, iban, salario, horas);
             double salariocombonus = (fun.bonusPorHora());
+            d.inserirFuncionarios(nome, estatuto, iban, nome, iban, salario, horas);
             stmt.executeUpdate("Insert into Funcionarios" + " values('" + nome + "','" + estatuto + "'," + ncontribuinte + "," + telemovel + ",'" + iban + "'," + salario + "," + horas + "," + salariocombonus + ")");
 
             stmt.close();
@@ -496,13 +497,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     public boolean validaNif(String nif) {
-
-        nif = jFormattedTextFieldNumContribuinte.getText();
+        int max = 9;
+//        nif = jFormattedTextFieldNumContribuinte.getText();
         try {
-            final int max = 9;
-            if (!nif.matches("[0-9]+") || nif.length() != max) {
-                return false;
-            }
+//            if (!nif.matches("[0-9]") || nif.length() != max) {
+//                return false;
+//            }
             int checkSum = 0;
             //calcula a soma de controlo
             for (int i = 0; i < max - 1; i++) {
@@ -514,7 +514,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
             return checkDigit == nif.charAt(max - 1) - '0';
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(jFormattedTextFieldNumContribuinte, e, nif, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(jFormattedTextFieldNumContribuinte, "Campo Vazio e incorreto!!!", nif, JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
