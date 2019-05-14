@@ -12,59 +12,36 @@ import java.util.ArrayList;
  * @author Francisco Cordeiro
  */
 public class GestaoFuncionarios {
-
+    
     //construtor
     public GestaoFuncionarios() {
-        tTodos = new ArrayList<>();
+        this.fu = new Funcionarios();
+        tFuncionarios = new ArrayList<>();
     }
 
     //variaveis
-    private ArrayList<GestaoTodos> tTodos;
-
+    private ArrayList<Funcionarios> tFuncionarios;
+    Funcionarios fu;
+    
     public void inserirFuncionarios(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
-        tTodos.add(new Funcionarios(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas) {
-            @Override
-            public double bonusPorHora() {
-                double bonusHora = 0.00;
-                double salarioTotal = 0.00;
-                bonusHora = 5.0 * horas;
-                salarioTotal = salario + bonusHora;
-                return salarioTotal;
-            }
-            
-            @Override
-            public String toString() {
-                StringBuilder output = new StringBuilder();
-                output.append("Nome: ").append(this.getNome()).append("\n");
-                output.append("Eatatuto: " + this.getEstatuto() + "\n");
-                output.append("Numero de contribuinte: " + this.getNcontribuinte() + "\n");
-                output.append("Telemóvel: " + this.getTelemovel() + "\n");
-                output.append("IBAN: " + this.getIBAN() + "\n");
-                output.append("Salário : ").append(this.getSalario()).append("€\n");
-                output.append("Horas Extra: ").append(this.getHoras()).append("\n");
-                output.append("Salário com bonus: ").append(this.bonusPorHora()).append("€\n");
-                output.append("------------").append("\n");
-                return output.toString();
-            }
-            
-        });
+        tFuncionarios.add(new Funcionarios(nome, estatuto, ncontribuinte, telemovel, nib, salario, horas));
     }
-
+    
     public String verTodos() {
         String output = "";
-        for (int i = 0; i < tTodos.size(); i++) {
-            output += tTodos.get(i).toString();
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            output = tFuncionarios.get(i).toString();
         }
         return output;
     }
-
+    
     //pesquisa por nome 
     public String pesquisaNome(String nomep) {
         String output = "";
         boolean existe = false;
-        for (int i = 0; i < tTodos.size(); i++) {
-            GestaoTodos f = tTodos.get(i);
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            Funcionarios f = tFuncionarios.get(i);
             if (f.getNome().equalsIgnoreCase(nomep)) {
                 output += f.getNome();
                 existe = true;
@@ -81,8 +58,8 @@ public class GestaoFuncionarios {
     public String pesquisarEstatuto(String estatutop) {
         String output = "";
         boolean existe = false;
-        for (int i = 0; i < tTodos.size(); i++) {
-            GestaoTodos f = tTodos.get(i);
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            Funcionarios f = tFuncionarios.get(i);
             if (f.getEstatuto().equalsIgnoreCase(estatutop)) {
                 output += f.getNome() + " : " + f.getEstatuto() + "\n";
                 existe = true;
@@ -99,13 +76,14 @@ public class GestaoFuncionarios {
     public String pesquisarNcontribuinte(String ncontribuintep) {
         String output = "";
         boolean existe = false;
-        for (int i = 0; i < tTodos.size(); i++) {
-            GestaoTodos f = tTodos.get(i);
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            Funcionarios f = tFuncionarios.get(i);
             if (f.getNcontribuinte().equals(ncontribuintep)) {
-                output = f.getNome()+" : "+f.getNcontribuinte() + "\n";
+                output += f.getNome() + " : " + f.getNcontribuinte() + "\n";
+                 existe = true;
             }
         }
-        if (!existe){
+        if (!existe) {
             output = "Número de contribuinte não encontrado!\n";
         }
         return output;
@@ -115,13 +93,14 @@ public class GestaoFuncionarios {
     public String pesquisarIban(String ibanp) {
         String output = "";
         boolean existe = false;
-        for (int i = 0; i < tTodos.size(); i++) {
-            GestaoTodos f = tTodos.get(i);
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            Funcionarios f = tFuncionarios.get(i);
             if (f.getIBAN().equalsIgnoreCase(ibanp)) {
-                output = f.getNome()+" : "+f.getIBAN()+ "\n";
+                output += f.getNome() + " : " + f.getIBAN() + "\n";
+                existe = true;
             }
         }
-        if (!existe){
+        if (!existe) {
             output = "Nib não encontrado!\n";
         }
         return output;
@@ -131,13 +110,14 @@ public class GestaoFuncionarios {
     public String pesquisarTelemovel(String telemovelp) {
         String output = "";
         boolean existe = false;
-        for (int i = 0; i < tTodos.size(); i++) {
-            GestaoTodos f = tTodos.get(i);
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            Funcionarios f = tFuncionarios.get(i);
             if (f.getTelemovel().equals(telemovelp)) {
-                output = f.getNome()+" : "+f.getTelemovel() + "\n";
+                output += f.getNome() + " : " + f.getTelemovel() + "\n";
+                 existe = true;
             }
         }
-        if (!existe){
+        if (!existe) {
             output = "Número de telemóvel não encontrado!\n";
         }
         return output;
@@ -147,13 +127,14 @@ public class GestaoFuncionarios {
     public String pesquisarSalario(double salariop) {
         String output = "";
         boolean existe = false;
-        for (int i = 0; i < tTodos.size(); i++) {
-            GestaoTodos f = tTodos.get(i);
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            Funcionarios f = tFuncionarios.get(i);
             if (f.getSalario() == salariop) {
-                output = f.getNome()+" : "+f.getSalario()+"\n";
+                output += f.getNome() + " : " + f.getSalario() + "\n";
+                 existe = true;
             }
         }
-        if (!existe){
+        if (!existe) {
             output = "Salário não encontrado!\n";
         }
         return output;
@@ -161,35 +142,44 @@ public class GestaoFuncionarios {
 
     //pesquisa por horas feitas
     public String pesquisarHoras(double horasp) {
-        String output = "Horas extras não feitas!\n";
-        for (int i = 0; i < tTodos.size(); i++) {
-            GestaoTodos f = tTodos.get(i);
+        String output = "";
+        boolean existe = false;
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            Funcionarios f = tFuncionarios.get(i);
             if (f.getHoras() == horasp) {
-                output += f.getNome()+" : "+f.getHoras()+" horas "+ "\n";
+                output += f.getNome() + " : " + f.getHoras() + " horas " + "\n";
+                 existe = true;
             }
-        }   
-        
+        }
+         if (!existe) {
+            output = "Horas extras não feitas!\n";
+        }
         return output;
     }
 
     public String pesquisaSalariosEntreDoisSalarios(double salariomin, double salariomax) {
         String output = "";
-        for (int i = 0; i < tTodos.size(); i++) {
-            GestaoTodos f = tTodos.get(i);
+         boolean existe = false;
+        for (int i = 0; i < tFuncionarios.size(); i++) {
+            Funcionarios f = tFuncionarios.get(i);
             if ((f.getSalario() > salariomin) && (f.getSalario() < salariomax)) {
-                output += f.getNome()+" : "+f.getSalario() + "\n";
+                output += f.getNome() + " : " + f.getSalario() + "\n";
+                 existe = true;
             }
+        }
+        if (!existe) {
+            output = "Salários não encontrado!\n";
         }
         return output;
     }
-    
+
     //gets e sets do array
-    public ArrayList<GestaoTodos> gettTodos() {
-        return tTodos;
+    public ArrayList<Funcionarios> gettTodos() {
+        return tFuncionarios;
     }
 
-    public void settTodos(ArrayList<GestaoTodos> tTodos) {
-        this.tTodos = tTodos;
+    public void settTodos(ArrayList<Funcionarios> tTodos) {
+        this.tFuncionarios = tTodos;
     }
     
 }

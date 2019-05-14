@@ -13,8 +13,8 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
-
 
 /**
  *
@@ -26,7 +26,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
      * Creates new form AppGestaFuncionarios
      */
     public AppGestaFuncionarios() {
-        
+        this.fun = new Funcionarios();
+
         try {
             formatter1 = new MaskFormatter("#########");//nc
             formatter2 = new MaskFormatter("9########");//tele
@@ -36,7 +37,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +66,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jDialogVerFuncionarios = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaOutput = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
+        Atualizar = new javax.swing.JButton();
         jDialogVerTabelaDeFuncionarios = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -94,6 +96,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabelNúmeroDeContribuinte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNúmeroDeContribuinte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNúmeroDeContribuinte.setText("Número de Contribuinte:");
+
+        jFormattedTextFieldNumContribuinte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldNumContribuinteActionPerformed(evt);
+            }
+        });
 
         jLabelTelemovel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelTelemovel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -200,7 +208,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         );
 
         jDialogVerFuncionarios.setTitle("Ver Funcionarios");
-        jDialogVerFuncionarios.setLocationByPlatform(true);
         jDialogVerFuncionarios.setMinimumSize(new java.awt.Dimension(836, 638));
 
         jTextAreaOutput.setColumns(20);
@@ -208,12 +215,20 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jTextAreaOutput.setMinimumSize(new java.awt.Dimension(816, 538));
         jScrollPane1.setViewportView(jTextAreaOutput);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Atualizar");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLimpar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButtonLimpar.setText("Limpar");
+        jButtonLimpar.setToolTipText("");
+        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonLimparActionPerformed(evt);
+            }
+        });
+
+        Atualizar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Atualizar.setText("Atualizar");
+        Atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarActionPerformed(evt);
             }
         });
 
@@ -223,21 +238,24 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogVerFuncionariosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
+                .addGroup(jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
+                    .addGroup(jDialogVerFuncionariosLayout.createSequentialGroup()
+                        .addComponent(Atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jDialogVerFuncionariosLayout.createSequentialGroup()
-                .addGap(324, 324, 324)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialogVerFuncionariosLayout.setVerticalGroup(
             jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogVerFuncionariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(Atualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jDialogVerTabelaDeFuncionarios.setTitle("Tabela de Funcionarios");
@@ -362,14 +380,15 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         String iban = jFormattedTextFieldIBAN.getText();
         double salario = Double.parseDouble(jTextFieldSalario.getText());
         double horas = Double.parseDouble(jTextFieldHoras.getText());
-        f.inserirFuncionarios(nome, estatuto, ncontribuinte, telemovel, iban, salario, horas);
+        d.inserirFuncionarios(nome, estatuto, ncontribuinte, telemovel, iban, salario, horas);
+
         this.inserirDadosBD();
+
         this.limpaCampos();
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
     private void jMenuItemVerFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerFuncionariosActionPerformed
         jDialogVerFuncionarios.setVisible(true);
-        jTextAreaOutput.setText(f.verTodos());
     }//GEN-LAST:event_jMenuItemVerFuncionariosActionPerformed
 
     private void jMenuItemVerTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerTabelaActionPerformed
@@ -391,11 +410,19 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 //        jDialogVerTabelaDeFuncionarios.setVisible(true);
     }//GEN-LAST:event_jMenuItemVerTabelaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTextAreaOutput.append(f.verTodos());
-    }//GEN-LAST:event_jButton1ActionPerformed
-    
-   private void lerEstatutosBDJComboBox(){
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        jTextAreaOutput.setText("");
+    }//GEN-LAST:event_jButtonLimparActionPerformed
+
+    private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
+        jTextAreaOutput.append(d.verTodos());
+    }//GEN-LAST:event_AtualizarActionPerformed
+
+    private void jFormattedTextFieldNumContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNumContribuinteActionPerformed
+        
+    }//GEN-LAST:event_jFormattedTextFieldNumContribuinteActionPerformed
+
+    private void lerEstatutosBDJComboBox() {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -421,8 +448,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             System.err.println("SQLException: " + ex.getMessage());
         }
     }
-   
-    private void limpaCampos(){
+
+    private void limpaCampos() {
         jTextFieldNome.setText("");
         jComboBoxEstatutos.setSelectedIndex(0);
         jFormattedTextFieldNumContribuinte.setText("");
@@ -431,9 +458,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jTextFieldSalario.setText("");
         jTextFieldHoras.setText("");
     }
-    
-    private void inserirDadosBD(){
-        
+
+    private void inserirDadosBD() {
         // Ler BD
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
@@ -452,14 +478,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             String nome = jTextFieldNome.getText();
             String estatuto = jComboBoxEstatutos.getSelectedItem().toString();
             int ncontribuinte = Integer.parseInt(jFormattedTextFieldNumContribuinte.getText());
-            int  telemovel = Integer.parseInt(jFormattedTextFieldTelemovel.getText());
+            int telemovel = Integer.parseInt(jFormattedTextFieldTelemovel.getText());
             String iban = jFormattedTextFieldIBAN.getText();
             double salario = Double.parseDouble(jTextFieldSalario.getText());
             double horas = Double.parseDouble(jTextFieldHoras.getText());
-            double salariocombonus = 0.0;
-            stmt.executeUpdate("INSERT INTO Funcionarios "
-                    + "VALUES (" + nome + "," + estatuto + "," + ncontribuinte
-                    + "," + telemovel +","+ iban +","+ salario +","+ horas +")");
+            d.inserirFuncionarios(nome, estatuto, iban, nome, iban, salario, horas);
+            double salariocombonus = (fun.bonusPorHora());
+            stmt.executeUpdate("Insert into Funcionarios" + " values('" + nome + "','" + estatuto + "'," + ncontribuinte + "," + telemovel + ",'" + iban + "'," + salario + "," + horas + "," + salariocombonus + ")");
 
             stmt.close();
             con.close();
@@ -467,12 +492,33 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
-
         // Fim LerBD
-        this.limpaCampos();
     }
-    
-    
+
+    public boolean validaNif(String nif) {
+
+        nif = jFormattedTextFieldNumContribuinte.getText();
+        try {
+            final int max = 9;
+            if (!nif.matches("[0-9]+") || nif.length() != max) {
+                return false;
+            }
+            int checkSum = 0;
+            //calcula a soma de controlo
+            for (int i = 0; i < max - 1; i++) {
+                checkSum += (nif.charAt(i) - '0') * (max - i);
+            }
+            int checkDigit = 11 - (checkSum % 11);
+            if (checkDigit >= 10) {
+                checkDigit = 0;
+            }
+            return checkDigit == nif.charAt(max - 1) - '0';
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(jFormattedTextFieldNumContribuinte, e, nif, JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -508,10 +554,11 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         });
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Atualizar;
     private javax.swing.JButton jButtonInserir;
+    private javax.swing.JButton jButtonLimpar;
     private javax.swing.JComboBox<String> jComboBoxEstatutos;
     private javax.swing.JDialog jDialogInserirFunc;
     private javax.swing.JDialog jDialogVerFuncionarios;
@@ -545,9 +592,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSalario;
     // End of variables declaration//GEN-END:variables
 
-    GestaoFuncionarios f = new GestaoFuncionarios();
-    
+    GestaoFuncionarios d = new GestaoFuncionarios();
+    Funcionarios fun;
     MaskFormatter formatter1;
     MaskFormatter formatter2;
-    MaskFormatter formatter3; 
+    MaskFormatter formatter3;
 }

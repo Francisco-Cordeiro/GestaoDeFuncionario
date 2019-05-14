@@ -10,7 +10,7 @@ package gestaodefuncionariosdesupermercados;
  * @author Francisco Cordeiro
  */
 
-public abstract class Funcionarios implements GestaoTodos{
+public class Funcionarios {
     
     public Funcionarios(String nome, String estatuto, String ncontribuinte, String telemovel, String iban, double salario, double  horas) {
         this.nome = nome; 
@@ -23,13 +23,15 @@ public abstract class Funcionarios implements GestaoTodos{
     }
     
     public Funcionarios() {
-        this("","","","","",0.00,0.00);
+        nome = ""; 
+        estatuto = "";
+        ncontribuinte = "";
+        telemovel ="";
+        iban = "";
+        salario= 0.0;
+        horas=0.0;
     }
     
-    public abstract double bonusPorHora();
-    @Override
-    public abstract String toString();
-
     private String nome;
     private String estatuto;
     private String ncontribuinte;
@@ -46,7 +48,6 @@ public abstract class Funcionarios implements GestaoTodos{
         this.nome = nome;
     }
 
-    @Override
     public String getEstatuto() {
         return estatuto;
     }
@@ -55,7 +56,6 @@ public abstract class Funcionarios implements GestaoTodos{
         this.estatuto = estatuto;
     }
 
-    @Override
     public String getNcontribuinte() {
         return ncontribuinte;
     }
@@ -64,7 +64,6 @@ public abstract class Funcionarios implements GestaoTodos{
         this.ncontribuinte = ncontribuinte;
     }
 
-    @Override
     public String getTelemovel() {
         return telemovel;
     }
@@ -73,7 +72,6 @@ public abstract class Funcionarios implements GestaoTodos{
         this.telemovel = telemovel;
     }
 
-    @Override
     public String getIBAN() {
         return iban;
     }
@@ -82,7 +80,6 @@ public abstract class Funcionarios implements GestaoTodos{
         this.iban = iban;
     }
 
-    @Override
     public double getSalario() {
         return salario;
     }
@@ -91,7 +88,6 @@ public abstract class Funcionarios implements GestaoTodos{
         this.salario = salario;
     }
 
-    @Override
     public double getHoras() {
         return horas;
     }
@@ -100,4 +96,27 @@ public abstract class Funcionarios implements GestaoTodos{
         this.horas = horas;
     }
     
+    public double bonusPorHora() {
+        double bonusHora = 0.00;
+        double salarioTotal = 0.00;
+        bonusHora = 5.0 *getHoras() ;
+        salarioTotal = getSalario() + bonusHora;
+        return salarioTotal;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("Nome: ").append(getNome()).append("\n");
+        output.append("Eatatuto: ").append(getEstatuto()).append("\n");
+        output.append("Numero de contribuinte: ").append(getNcontribuinte()).append("\n");
+        output.append("Telemóvel: ").append(getTelemovel()).append("\n");
+        output.append("IBAN: ").append(getIBAN()).append("\n");
+        output.append("Salário : ").append(getSalario()).append("€\n");
+        output.append("Horas Extra: ").append(getHoras()).append("\n");
+        output.append("Salário com bonus: ").append(bonusPorHora()).append("€\n");
+        output.append("------------").append("\n");
+        return output.toString();
+    }
+  
 }

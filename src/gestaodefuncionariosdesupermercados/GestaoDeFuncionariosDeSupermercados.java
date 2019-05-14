@@ -34,7 +34,7 @@ public class GestaoDeFuncionariosDeSupermercados {
         System.out.println("-------");
         System.out.println("Pesquisa por horas feitas: \n" + s.pesquisarHoras(5.00));
         System.out.println("-------");
-        System.out.println("Pesquisa os salarios entre 0 e 3500: \n" + s.pesquisaSalariosEntreDoisSalarios(0, 4000));
+        System.out.println("Pesquisa os salarios entre 0 e 4000: \n" + s.pesquisaSalariosEntreDoisSalarios(0, 4000));
 
     }
 
