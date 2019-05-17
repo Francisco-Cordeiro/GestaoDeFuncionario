@@ -38,11 +38,12 @@ public class GestaoFuncionarios {
         return output;
     }
     
-    public double bonusPorHora() {
+    public double bonusPorHora() {    //não retorna o valor 
         bonusHora = 5.0 *fu.getHoras();
         salarioTotal = fu.getSalario() + bonusHora;
         return salarioTotal;
     }
+    
     //pesquisa por nome 
     public String pesquisaNome(String nomep) {
         String output = "";
