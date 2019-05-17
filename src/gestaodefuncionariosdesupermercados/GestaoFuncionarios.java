@@ -22,6 +22,8 @@ public class GestaoFuncionarios {
     //variaveis
     private ArrayList<Funcionarios> tFuncionarios;
     Funcionarios fu;
+    private double bonusHora = 0;
+    private double salarioTotal = 0;
     
     public void inserirFuncionarios(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
@@ -31,11 +33,16 @@ public class GestaoFuncionarios {
     public String verTodos() {
         String output = "";
         for (int i = 0; i < tFuncionarios.size(); i++) {
-            output = tFuncionarios.get(i).toString();
+            output += tFuncionarios.get(i).toString();
         }
         return output;
     }
     
+    public double bonusPorHora() {
+        bonusHora = 5.0 *fu.getHoras();
+        salarioTotal = fu.getSalario() + bonusHora;
+        return salarioTotal;
+    }
     //pesquisa por nome 
     public String pesquisaNome(String nomep) {
         String output = "";
@@ -174,12 +181,13 @@ public class GestaoFuncionarios {
     }
 
     //gets e sets do array
-    public ArrayList<Funcionarios> gettTodos() {
+
+    public ArrayList<Funcionarios> gettFuncionarios() {
         return tFuncionarios;
     }
 
-    public void settTodos(ArrayList<Funcionarios> tTodos) {
-        this.tFuncionarios = tTodos;
+    public void settFuncionarios(ArrayList<Funcionarios> tFuncionarios) {
+        this.tFuncionarios = tFuncionarios;
     }
     
 }

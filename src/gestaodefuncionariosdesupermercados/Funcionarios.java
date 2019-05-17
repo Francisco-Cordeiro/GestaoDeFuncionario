@@ -96,27 +96,7 @@ public class Funcionarios {
         this.horas = horas;
     }
     
-    public double bonusPorHora() {
-        double bonusHora = 0.00;
-        double salarioTotal = 0.00;
-        bonusHora = 5.0 *getHoras() ;
-        salarioTotal = getSalario() + bonusHora;
-        return salarioTotal;
-    }
-    
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append("Nome: ").append(getNome()).append("\n");
-        output.append("Eatatuto: ").append(getEstatuto()).append("\n");
-        output.append("Numero de contribuinte: ").append(getNcontribuinte()).append("\n");
-        output.append("Telemóvel: ").append(getTelemovel()).append("\n");
-        output.append("IBAN: ").append(getIBAN()).append("\n");
-        output.append("Salário : ").append(getSalario()).append("€\n");
-        output.append("Horas Extra: ").append(getHoras()).append("\n");
-        output.append("Salário com bonus: ").append(bonusPorHora()).append("€\n");
-        output.append("------------").append("\n");
-        return output.toString();
-    }
+   
+
   
 }

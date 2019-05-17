@@ -17,6 +17,7 @@ public class GestaoDeFuncionariosDeSupermercados {
     public static void main(String[] args) {
 
         GestaoFuncionarios s = new GestaoFuncionarios();
+        Funcionarios f = new Funcionarios();
 
         s.inserirFuncionarios("Francisco Cordeiro", "Diretor", "439087785", "963452747", "PT5019621327573912", 3000.00, 5.00);
         System.out.println(s.verTodos());
@@ -35,6 +36,8 @@ public class GestaoDeFuncionariosDeSupermercados {
         System.out.println("Pesquisa por horas feitas: \n" + s.pesquisarHoras(5.00));
         System.out.println("-------");
         System.out.println("Pesquisa os salarios entre 0 e 4000: \n" + s.pesquisaSalariosEntreDoisSalarios(0, 4000));
+        System.out.println("-------");
+        System.out.println("Pesquisa os salarios com bonus: \n" + s.bonusPorHora());
 
     }
 

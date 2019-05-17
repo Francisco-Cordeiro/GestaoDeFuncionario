@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -26,7 +27,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
      * Creates new form AppGestaFuncionarios
      */
     public AppGestaFuncionarios() {
-        this.fun = new Funcionarios();
+        this.fu = new Funcionarios();
 
         try {
             formatter1 = new MaskFormatter("#########");//nc
@@ -69,6 +70,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jButtonLimpar = new javax.swing.JButton();
         Atualizar = new javax.swing.JButton();
         jDialogVerTabelaDeFuncionarios = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -86,15 +89,15 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jDialogInserirFunc.setMinimumSize(new java.awt.Dimension(870, 570));
 
         jLabelNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelNome.setText("Nome:");
 
         jLabelEstatuto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelEstatuto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelEstatuto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelEstatuto.setText("Estatuto:");
 
         jLabelNúmeroDeContribuinte.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelNúmeroDeContribuinte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNúmeroDeContribuinte.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelNúmeroDeContribuinte.setText("Número de Contribuinte:");
 
         jFormattedTextFieldNumContribuinte.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +107,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         });
 
         jLabelTelemovel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelTelemovel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTelemovel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelTelemovel.setText("Telemovel:");
 
         jLabelIBAN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -121,6 +124,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabelHoras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelHoras.setText("Horas:");
         jLabelHoras.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jTextFieldHoras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldHorasActionPerformed(evt);
+            }
+        });
 
         jButtonInserir.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonInserir.setText("Inserir");
@@ -141,34 +150,33 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                         .addComponent(jButtonInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
-                                .addComponent(jLabelEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxEstatutos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
                                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelSalário)
-                                    .addComponent(jLabelIBAN)
-                                    .addComponent(jLabelHoras))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabelHoras)
+                                    .addComponent(jLabelIBAN))
+                                .addGap(128, 128, 128)
                                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jFormattedTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jFormattedTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
-                                .addComponent(jLabelTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelNúmeroDeContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
-                                .addComponent(jLabelNúmeroDeContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldNumContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
-                                .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 72, Short.MAX_VALUE)))
+                                .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldNome)
+                                    .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
+                                        .addComponent(jFormattedTextFieldTelemovel, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                                        .addGap(94, 94, 94))
+                                    .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jComboBoxEstatutos, javax.swing.GroupLayout.Alignment.LEADING, 0, 181, Short.MAX_VALUE)
+                                        .addComponent(jFormattedTextFieldNumContribuinte, javax.swing.GroupLayout.Alignment.LEADING)))))
+                        .addGap(0, 40, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jDialogInserirFuncLayout.setVerticalGroup(
@@ -190,19 +198,19 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFormattedTextFieldTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(40, 40, 40)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelIBAN)
                     .addComponent(jFormattedTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(44, 44, 44)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelSalário)
+                    .addComponent(jLabelSalário, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelHoras)
                     .addComponent(jTextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jButtonInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -259,16 +267,42 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         );
 
         jDialogVerTabelaDeFuncionarios.setTitle("Tabela de Funcionarios");
+        jDialogVerTabelaDeFuncionarios.setMinimumSize(new java.awt.Dimension(1110, 565));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Estatuto", "Numero de Contribuinte", "Telemovel", "IBAN", "Horas feitas", "Salario", "Salario com Bonus"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setMinimumSize(new java.awt.Dimension(1183, 551));
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jDialogVerTabelaDeFuncionariosLayout = new javax.swing.GroupLayout(jDialogVerTabelaDeFuncionarios.getContentPane());
         jDialogVerTabelaDeFuncionarios.getContentPane().setLayout(jDialogVerTabelaDeFuncionariosLayout);
         jDialogVerTabelaDeFuncionariosLayout.setHorizontalGroup(
             jDialogVerTabelaDeFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(jDialogVerTabelaDeFuncionariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1183, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jDialogVerTabelaDeFuncionariosLayout.setVerticalGroup(
             jDialogVerTabelaDeFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(jDialogVerTabelaDeFuncionariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -383,7 +417,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         d.inserirFuncionarios(nome, estatuto, ncontribuinte, telemovel, iban, salario, horas);
 
         this.inserirDadosBD();
-        System.out.println("nif: "+validaNif(ncontribuinte));
+        //System.out.println("nif: "+validaNif(ncontribuinte));
         this.limpaCampos();
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
@@ -392,22 +426,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemVerFuncionariosActionPerformed
 
     private void jMenuItemVerTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerTabelaActionPerformed
-//        DefaultTableModel modelo = (DefaultTableModel) jTableFuncionarios.getModel();
-//        modelo.setRowCount(0);
-//        ArrayList<GestaoTodos> t = f.gettTodos();
-//        for (GestaoTodos a : t) {
-//            Object[] rowData = {
-//                a.getNome(),
-//                a.getEstatuto(),
-//                a.getNcontribuinte(),
-//                a.getTelemovel(),
-//                a.getIBAN(),
-//                a.getSalario(),
-//                a.getHoras()
-//            };
-//            modelo.addRow(rowData);
-//        }
-//        jDialogVerTabelaDeFuncionarios.setVisible(true);
+        lerDadosTabela();
+        jDialogVerTabelaDeFuncionarios.setVisible(true);
     }//GEN-LAST:event_jMenuItemVerTabelaActionPerformed
 
     private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
@@ -415,14 +435,17 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
-        jTextAreaOutput.setText("");
-        jTextAreaOutput.append(d.verTodos());
+        lerBDTextArea();
     }//GEN-LAST:event_AtualizarActionPerformed
 
     private void jFormattedTextFieldNumContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNumContribuinteActionPerformed
         
     }//GEN-LAST:event_jFormattedTextFieldNumContribuinteActionPerformed
 
+    private void jTextFieldHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHorasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldHorasActionPerformed
+    
     private void lerEstatutosBDJComboBox() {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
@@ -449,7 +472,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             System.err.println("SQLException: " + ex.getMessage());
         }
     }
-
+    
     private void limpaCampos() {
         jTextFieldNome.setText("");
         jComboBoxEstatutos.setSelectedIndex(0);
@@ -483,7 +506,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             String iban = jFormattedTextFieldIBAN.getText();
             double salario = Double.parseDouble(jTextFieldSalario.getText());
             double horas = Double.parseDouble(jTextFieldHoras.getText());
-            double salariocombonus = (fun.bonusPorHora());
+            double salariocombonus = (d.bonusPorHora());
             d.inserirFuncionarios(nome, estatuto, iban, nome, iban, salario, horas);
             stmt.executeUpdate("Insert into Funcionarios" + " values('" + nome + "','" + estatuto + "'," + ncontribuinte + "," + telemovel + ",'" + iban + "'," + salario + "," + horas + "," + salariocombonus + ")");
 
@@ -519,6 +542,95 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         return false;
     }
 
+    public void lerDadosTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            String nomeTabela = "Funcionarios";
+            ResultSet rs = stmt.executeQuery("select * from " + nomeTabela);
+
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String estatuto = rs.getString("Estatuto");
+                String ncontribuinte = rs.getString("Número de Contribuinte");
+                String telemovel = rs.getString("Telemovel");
+                String iban =rs.getString("IBAN");
+                String salario = rs.getString("Salário");
+                String horas = rs.getString("Horas");
+                //String salariocombonus = rs.getString("Salario com Bonus");
+                Object[] rowData = {
+                    nome,
+                    estatuto,
+                    ncontribuinte,
+                    telemovel,
+                    iban,
+                    salario,
+                    horas,
+                    //salariocombonus
+                };
+                modelo.addRow(rowData);
+            }
+            stmt.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }  
+    }
+    
+    private void lerBDTextArea() {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from Funcionarios");
+            
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String estatuto = rs.getString("Estatuto");
+                String ncontribuinte = rs.getString("Número de Contribuinte");
+                String telemovel = rs.getString("Telemovel");
+                String iban =rs.getString("IBAN");
+                String salario = rs.getString("Salário");
+                String horas = rs.getString("Horas");
+                String salariocombonus = rs.getString("Salario com Bonus");
+                jTextAreaOutput.append("Nome: "+nome+"\n"
+                                        + "Estatuto: "+estatuto+"\n"
+                                        + "Número de Contribuinte: "+ncontribuinte+"\n"
+                                        + "Telemovel: "+telemovel+"\n"
+                                        + "IBAN: "+iban+"\n"
+                                        + "Salário: "+salario+"\n"
+                                        + "Horas:"+horas+"\n"
+                                        + "Salrio com Bonu: "+salariocombonus+"\n"
+                                        + "-------------------------------------------\n"); 
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -586,6 +698,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuVer;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextAreaOutput;
     private javax.swing.JTextField jTextFieldHoras;
     private javax.swing.JTextField jTextFieldNome;
@@ -593,7 +707,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     GestaoFuncionarios d = new GestaoFuncionarios();
-    Funcionarios fun;
+    Funcionarios fu;
     MaskFormatter formatter1;
     MaskFormatter formatter2;
     MaskFormatter formatter3;
