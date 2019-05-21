@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
@@ -730,9 +729,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         double salario = Double.parseDouble(jTextFieldSalario.getText());
         double horas = Double.parseDouble(jTextFieldHoras.getText());
         d.inserirFuncionarios(nome, estatuto, ncontribuinte, telemovel, iban, salario, horas);
-
         this.inserirDadosBD();
-//        this.validaNif(ncontribuinte);
+        this.validaNif(ncontribuinte);
         this.limpaCampos();
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
@@ -755,8 +753,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         String nomep = jTextFieldNome.getText();
-        String sql = "select * from Funcionarios where Nome like '"+nomep+"%'" ;
-        lerTabelaNo(sql);
+        String sql = "select * from Funcionarios where Nome like '" + nomep + "%'";
+        this.lerTabelaNo(sql);
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jMenuItemPesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqNomeActionPerformed
@@ -766,14 +764,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
     private void jMenuItemPesqEstatutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqEstatutoActionPerformed
         this.lerDadosTabelaPsqEstatuto();
-        lerEstatutosBDJComboBox2();
+        this.lerEstatutosBDJComboBox2();
         jDialogPesquisaEstatuto.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesqEstatutoActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String estatutop = jComboBox1.getSelectedItem().toString();
-        String sql = "select Nome, Estatuto from Funcionarios where Estatuto like '"+estatutop+"%'" ;
-        lerTabelaEstatuto(sql);
+        String sql = "select Nome, Estatuto from Funcionarios where Estatuto like '" + estatutop + "%'";
+        this.lerTabelaEstatuto(sql);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jMenuItemPesquisaContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisaContribuinteActionPerformed
@@ -783,14 +781,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
     private void jFormattedTextFieldNContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNContribuinteActionPerformed
         String contribuintep = jFormattedTextFieldNContribuinte.getText();
-        String sql = "select Nome, Contribuinte from Funcionarios where Contribuinte like '"+contribuintep+"%'" ;
+        String sql = "select Nome, Contribuinte from Funcionarios where Contribuinte like '" + contribuintep + "%'";
         lerTabelaNumContribuinte(sql);
     }//GEN-LAST:event_jFormattedTextFieldNContribuinteActionPerformed
 
     private void jFormattedTextFieldNumContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNumContribuinteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldNumContribuinteActionPerformed
-    
+
     private void lerEstatutosBDJComboBox() {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
@@ -817,34 +815,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             System.err.println("SQLException: " + ex.getMessage());
         }
     }
-    
-    private void lerEstatutosBDJComboBox2() {
-        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
-        Connection con;
-        Statement stmt;
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            con = DriverManager.getConnection(url);
-            stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from Estatutos order by Nome");
 
-            jComboBox1.removeAllItems();
-            jComboBox1.addItem("-- Escolha o estatuto --");
-            while (rs.next()) {
-                String estatuto = rs.getString("Nome");
-                jComboBox1.addItem(estatuto);
-            }
-            stmt.close();
-            con.close();
-        } catch (SQLException ex) {
-            System.err.println("SQLException: " + ex.getMessage());
-        }
-    }
-    
     private void limpaCampos() {
         jTextFieldNome.setText("");
         jComboBoxEstatutos.setSelectedIndex(0);
@@ -890,6 +861,48 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         // Fim LerBD
     }
 
+    private void lerBDTextArea() {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from Funcionarios order by nome");
+
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String estatuto = rs.getString("Estatuto");
+                String ncontribuinte = rs.getString("Contribuinte");
+                String telemovel = rs.getString("Telemovel");
+                String iban = rs.getString("IBAN");
+                String salario = rs.getString("Salário");
+                String horas = rs.getString("Horas");
+                double bonus = rs.getDouble("Bonus");
+                jTextAreaOutput.append("Nome: " + nome + "\n"
+                        + "Estatuto: " + estatuto + "\n"
+                        + "Número de Contribuinte: " + ncontribuinte + "\n"
+                        + "Telemovel: " + telemovel + "\n"
+                        + "IBAN: " + iban + "\n"
+                        + "Salário: " + salario + "\n"
+                        + "Horas:" + horas + "\n"
+                        + "Salário com Bonus: " + bonus + "\n"
+                        + "-----------------------------------------\n");
+            }
+
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+
     public boolean validaNif(String nif) {
         int max = 9;
 //        nif = jFormattedTextFieldNumContribuinte.getText();
@@ -913,7 +926,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         return false;
     }
 
-    public void lerDadosTabela(){
+    public void lerDadosTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTableFuncionarios.getModel();
         modelo.setRowCount(0);
 
@@ -937,7 +950,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 String estatuto = rs.getString("Estatuto");
                 String ncontribuinte = rs.getString("Contribuinte");
                 String telemovel = rs.getString("Telemovel");
-                String iban =rs.getString("IBAN");
+                String iban = rs.getString("IBAN");
                 String salario = rs.getString("Salário");
                 String horas = rs.getString("Horas");
                 double bonus = rs.getDouble("Bonus");
@@ -952,17 +965,23 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                     bonus
                 };
                 modelo.addRow(rowData);
-                
+
             }
             stmt.close();
             con.close();
 
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
-        }  
+        }
     }
-    
-    public void lerDadosTabelaPsqNome(){
+
+    public double bonusPorHora() {
+        bonusHora = 5.0 * (Double.parseDouble(jTextFieldHoras.getText()));
+        salarioTotal = (Double.parseDouble(jTextFieldSalario.getText())) + bonusHora;
+        return salarioTotal;
+    }
+
+    public void lerDadosTabelaPsqNome() {
         DefaultTableModel modelo = (DefaultTableModel) jTablePesqNome.getModel();
         modelo.setRowCount(0);
 
@@ -986,7 +1005,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 String estatuto = rs.getString("Estatuto");
                 String ncontribuinte = rs.getString("Contribuinte");
                 String telemovel = rs.getString("Telemovel");
-                String iban =rs.getString("IBAN");
+                String iban = rs.getString("IBAN");
                 String salario = rs.getString("Salário");
                 String horas = rs.getString("Horas");
                 double bonus = rs.getDouble("Bonus");
@@ -1007,10 +1026,58 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
-        }  
+        }
     }
-    
-    public void lerDadosTabelaPsqEstatuto(){
+
+    private void lerTabelaNo(String sql) {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            DefaultTableModel modelo = (DefaultTableModel) jTablePesqNome.getModel();
+            modelo.setRowCount(0);
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String estatuto = rs.getString("Estatuto");
+                String ncontribuinte = rs.getString("Contribuinte");
+                String telemovel = rs.getString("Telemovel");
+                String iban = rs.getString("IBAN");
+                String salario = rs.getString("Salário");
+                String horas = rs.getString("Horas");
+                double bonus = rs.getDouble("Bonus");
+                Object[] dados = {
+                    nome,
+                    estatuto,
+                    ncontribuinte,
+                    telemovel,
+                    iban,
+                    salario,
+                    horas,
+                    bonus
+                };
+                modelo.addRow(dados);
+            }
+            stmt.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+
+    }
+
+    public void lerDadosTabelaPsqEstatuto() {
         DefaultTableModel modelo = (DefaultTableModel) jTableEstatuto.getModel();
         modelo.setRowCount(0);
 
@@ -1032,7 +1099,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             while (rs.next()) {
                 String estatuto = rs.getString("Estatuto");
                 String nome = rs.getString("Nome");
-                
+
                 Object[] rowData = {
                     estatuto,
                     nome
@@ -1044,10 +1111,74 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
-        }  
+        }
     }
-    
-    public void lerDadosTabelaPsqNumContribuinte(){
+
+    private void lerEstatutosBDJComboBox2() {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from Estatutos order by Nome");
+
+            jComboBox1.removeAllItems();
+            jComboBox1.addItem("-- Escolha o estatuto --");
+            while (rs.next()) {
+                String estatuto = rs.getString("Nome");
+                jComboBox1.addItem(estatuto);
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+
+    private void lerTabelaEstatuto(String sql) {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            DefaultTableModel modelo = (DefaultTableModel) jTableEstatuto.getModel();
+            modelo.setRowCount(0);
+            while (rs.next()) {
+                String estatuto = rs.getString("Estatuto");
+                String nome = rs.getString("Nome");
+
+                Object[] dados = {
+                    estatuto,
+                    nome
+                };
+                modelo.addRow(dados);
+            }
+            stmt.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+
+    }
+
+    public void lerDadosTabelaPsqNumContribuinte() {
         DefaultTableModel modelo = (DefaultTableModel) jTableNContribuinte.getModel();
         modelo.setRowCount(0);
 
@@ -1080,165 +1211,32 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
-        }  
+        }
     }
-    
-    private void lerBDTextArea() {
+
+    private void lerTabelaNumContribuinte(String sql) {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
-        
+
         try {
             Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
         }
+
         try {
             con = DriverManager.getConnection(url);
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from Funcionarios order by nome");
-            
+            ResultSet rs = stmt.executeQuery(sql);
+            DefaultTableModel modelo = (DefaultTableModel) jTableNContribuinte.getModel();
+            modelo.setRowCount(0);
             while (rs.next()) {
-                String nome = rs.getString("Nome");
-                String estatuto = rs.getString("Estatuto");
                 String ncontribuinte = rs.getString("Contribuinte");
-                String telemovel = rs.getString("Telemovel");
-                String iban =rs.getString("IBAN");
-                String salario = rs.getString("Salário");
-                String horas = rs.getString("Horas");
-                double bonus = rs.getDouble("Bonus");
-                jTextAreaOutput.append(   "Nome: "+nome+"\n"
-                                        + "Estatuto: "+estatuto+"\n"
-                                        + "Número de Contribuinte: "+ncontribuinte+"\n"
-                                        + "Telemovel: "+telemovel+"\n"
-                                        + "IBAN: "+iban+"\n"
-                                        + "Salário: "+salario+"\n"
-                                        + "Horas:"+horas+"\n"
-                                        + "Salário com Bonus: "+bonus+"\n"
-                                        + "-----------------------------------------\n"); 
-            }
-            
-            stmt.close();
-            con.close();
-        } catch (SQLException ex) {
-            System.err.println("SQLException: " + ex.getMessage());
-        }
-    }
-    
-    public double bonusPorHora() {     
-        bonusHora = 5.0 *(Double.parseDouble(jTextFieldHoras.getText()));
-        salarioTotal = (Double.parseDouble(jTextFieldSalario.getText())) + bonusHora;
-        return salarioTotal;
-    }
-    
-    private void lerTabelaNo(String sql){
-        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
-        Connection con;
-        Statement stmt;
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch(java.lang.ClassNotFoundException e) {
-            System.err.print("ClassNotFoundException: ");
-            System.err.println(e.getMessage());
-        }
-
-        try {
-            con = DriverManager.getConnection(url);
-            stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            DefaultTableModel modelo = (DefaultTableModel)jTablePesqNome.getModel();
-            modelo.setRowCount(0);
-            while (rs.next()) {	
-            	String nome = rs.getString("Nome");
-                String estatuto = rs.getString("Estatuto");
-                String ncontribuinte = rs.getString("Contribuinte");
-                String telemovel = rs.getString("Telemovel");
-                String iban =rs.getString("IBAN");
-                String salario = rs.getString("Salário");
-                String horas = rs.getString("Horas");
-                double bonus = rs.getDouble("Bonus");
-                Object [] dados ={ 
-                    nome,
-                    estatuto,
-                    ncontribuinte,
-                    telemovel,
-                    iban,
-                    salario,
-                    horas,
-                    bonus
-                };
-                modelo.addRow(dados);
-            }
-            stmt.close();
-            con.close();
-
-        } catch(SQLException ex) {
-            System.err.println("SQLException: " + ex.getMessage());
-        }
-        
-    }
-    
-    private void lerTabelaEstatuto(String sql){
-        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
-        Connection con;
-        Statement stmt;
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch(java.lang.ClassNotFoundException e) {
-            System.err.print("ClassNotFoundException: ");
-            System.err.println(e.getMessage());
-        }
-
-        try {
-            con = DriverManager.getConnection(url);
-            stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            DefaultTableModel modelo = (DefaultTableModel)jTableEstatuto.getModel();
-            modelo.setRowCount(0);
-            while (rs.next()) {	
-            	String estatuto = rs.getString("Estatuto");
                 String nome = rs.getString("Nome");
-                
-                Object [] dados ={ 
-                    estatuto,
-                    nome
-                };
-                modelo.addRow(dados);
-            }
-            stmt.close();
-            con.close();
 
-        } catch(SQLException ex) {
-            System.err.println("SQLException: " + ex.getMessage());
-        }
-        
-    }
-  
-    private void lerTabelaNumContribuinte(String sql){
-        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
-        Connection con;
-        Statement stmt;
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch(java.lang.ClassNotFoundException e) {
-            System.err.print("ClassNotFoundException: ");
-            System.err.println(e.getMessage());
-        }
-
-        try {
-            con = DriverManager.getConnection(url);
-            stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            DefaultTableModel modelo = (DefaultTableModel)jTableNContribuinte.getModel();
-            modelo.setRowCount(0);
-            while (rs.next()) {	
-            	String ncontribuinte = rs.getString("Contribuinte");
-                String nome = rs.getString("Nome");
-                
-                Object [] dados ={ 
+                Object[] dados = {
                     nome,
                     ncontribuinte
                 };
@@ -1247,12 +1245,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             stmt.close();
             con.close();
 
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
-        
+
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -1356,6 +1354,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     MaskFormatter formatter3;
     MaskFormatter formatter4;
     private double bonusHora = 0;
-    private double salarioTotal = 0; 
-    
+    private double salarioTotal = 0;
+
 }
