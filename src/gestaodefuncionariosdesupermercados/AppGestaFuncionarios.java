@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
@@ -33,6 +34,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             formatter1 = new MaskFormatter("#########");//nc
             formatter2 = new MaskFormatter("9########");//tele
             formatter3 = new MaskFormatter("PT50 #### #### ########### ##");//IBAN
+            formatter4 = new MaskFormatter("#########");//nc pesq
         } catch (ParseException ex) {
             Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -54,16 +56,16 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabelEstatuto = new javax.swing.JLabel();
         jComboBoxEstatutos = new javax.swing.JComboBox<>();
         jLabelNúmeroDeContribuinte = new javax.swing.JLabel();
-        jFormattedTextFieldNumContribuinte = new javax.swing.JFormattedTextField(formatter1);
+        jFormattedTextFieldNumContribuinte = new javax.swing.JFormattedTextField();
         jLabelTelemovel = new javax.swing.JLabel();
         jFormattedTextFieldTelemovel = new javax.swing.JFormattedTextField(formatter2);
         jLabelIBAN = new javax.swing.JLabel();
         jFormattedTextFieldIBAN = new javax.swing.JFormattedTextField(formatter3);
         jLabelSalário = new javax.swing.JLabel();
+        jTextFieldSalario = new javax.swing.JTextField();
         jLabelHoras = new javax.swing.JLabel();
         jTextFieldHoras = new javax.swing.JTextField();
         jButtonInserir = new javax.swing.JButton();
-        jTextFieldSalario = new javax.swing.JTextField();
         jDialogVerFuncionarios = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaOutput = new javax.swing.JTextArea();
@@ -79,6 +81,20 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePesqNome = new javax.swing.JTable();
+        jDialogPesquisaEstatuto = new javax.swing.JDialog();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableEstatuto = new javax.swing.JTable();
+        jDialogPesquisaNumContribuinte = new javax.swing.JDialog();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jFormattedTextFieldNContribuinte = new javax.swing.JFormattedTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableNContribuinte = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -91,6 +107,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jMenuItemVerTabela = new javax.swing.JMenuItem();
         jMenuPesquisar = new javax.swing.JMenu();
         jMenuItemPesqNome = new javax.swing.JMenuItem();
+        jMenuItemPesqEstatuto = new javax.swing.JMenuItem();
+        jMenuItemPesquisaContribuinte = new javax.swing.JMenuItem();
 
         jDialogInserirFunc.setTitle("Inserir Funcionarios");
         jDialogInserirFunc.setMinimumSize(new java.awt.Dimension(870, 570));
@@ -132,12 +150,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabelHoras.setText("Horas:");
         jLabelHoras.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextFieldHoras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHorasActionPerformed(evt);
-            }
-        });
-
         jButtonInserir.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonInserir.setText("Inserir");
         jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -166,24 +178,22 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                                     .addComponent(jLabelIBAN))
                                 .addGap(128, 128, 128)
                                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jFormattedTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jFormattedTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
                                 .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelNúmeroDeContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelEstatuto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldNome)
-                                    .addGroup(jDialogInserirFuncLayout.createSequentialGroup()
-                                        .addComponent(jFormattedTextFieldTelemovel, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                                        .addGap(94, 94, 94))
+                                .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jDialogInserirFuncLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jComboBoxEstatutos, javax.swing.GroupLayout.Alignment.LEADING, 0, 181, Short.MAX_VALUE)
-                                        .addComponent(jFormattedTextFieldNumContribuinte, javax.swing.GroupLayout.Alignment.LEADING)))))
-                        .addGap(0, 40, Short.MAX_VALUE)))
+                                        .addComponent(jFormattedTextFieldNumContribuinte, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jFormattedTextFieldTelemovel, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+                                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxEstatutos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 32, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jDialogInserirFuncLayout.setVerticalGroup(
@@ -406,6 +416,189 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPesquisaEstatuto.setMinimumSize(new java.awt.Dimension(947, 738));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Estatuto:");
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(317, 317, 317)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(462, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTableEstatuto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Estatuto", "Nome"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTableEstatuto);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialogPesquisaEstatutoLayout = new javax.swing.GroupLayout(jDialogPesquisaEstatuto.getContentPane());
+        jDialogPesquisaEstatuto.getContentPane().setLayout(jDialogPesquisaEstatutoLayout);
+        jDialogPesquisaEstatutoLayout.setHorizontalGroup(
+            jDialogPesquisaEstatutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogPesquisaEstatutoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogPesquisaEstatutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialogPesquisaEstatutoLayout.setVerticalGroup(
+            jDialogPesquisaEstatutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogPesquisaEstatutoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jDialogPesquisaNumContribuinte.setMinimumSize(new java.awt.Dimension(1056, 808));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel4.setText("Número de Contribuinte:");
+
+        jFormattedTextFieldNContribuinte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldNContribuinteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jFormattedTextFieldNContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(320, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldNContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(147, Short.MAX_VALUE))
+        );
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTableNContribuinte.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Contribuinte"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTableNContribuinte);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jDialogPesquisaNumContribuinteLayout = new javax.swing.GroupLayout(jDialogPesquisaNumContribuinte.getContentPane());
+        jDialogPesquisaNumContribuinte.getContentPane().setLayout(jDialogPesquisaNumContribuinteLayout);
+        jDialogPesquisaNumContribuinteLayout.setHorizontalGroup(
+            jDialogPesquisaNumContribuinteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogPesquisaNumContribuinteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogPesquisaNumContribuinteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialogPesquisaNumContribuinteLayout.setVerticalGroup(
+            jDialogPesquisaNumContribuinteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogPesquisaNumContribuinteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestáo de Funcionarios");
         setMinimumSize(new java.awt.Dimension(943, 729));
@@ -479,6 +672,22 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         });
         jMenuPesquisar.add(jMenuItemPesqNome);
 
+        jMenuItemPesqEstatuto.setText("Pesqusar Estatuto");
+        jMenuItemPesqEstatuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesqEstatutoActionPerformed(evt);
+            }
+        });
+        jMenuPesquisar.add(jMenuItemPesqEstatuto);
+
+        jMenuItemPesquisaContribuinte.setText("Pesquisar Num. Contribuinte");
+        jMenuItemPesquisaContribuinte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesquisaContribuinteActionPerformed(evt);
+            }
+        });
+        jMenuPesquisar.add(jMenuItemPesquisaContribuinte);
+
         jMenuBar1.add(jMenuPesquisar);
 
         setJMenuBar(jMenuBar1);
@@ -544,14 +753,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         this.lerBDTextArea();
     }//GEN-LAST:event_AtualizarActionPerformed
 
-    private void jFormattedTextFieldNumContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNumContribuinteActionPerformed
-        
-    }//GEN-LAST:event_jFormattedTextFieldNumContribuinteActionPerformed
-
-    private void jTextFieldHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHorasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHorasActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         String nomep = jTextFieldNome.getText();
         String sql = "select * from Funcionarios where Nome like '"+nomep+"%'" ;
@@ -559,9 +760,36 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jMenuItemPesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqNomeActionPerformed
-//        this.lerDadosTabelaPsqNome();
+        this.lerDadosTabelaPsqNome();
         jDialogPesquisaNome.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesqNomeActionPerformed
+
+    private void jMenuItemPesqEstatutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqEstatutoActionPerformed
+        this.lerDadosTabelaPsqEstatuto();
+        lerEstatutosBDJComboBox2();
+        jDialogPesquisaEstatuto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesqEstatutoActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String estatutop = jComboBox1.getSelectedItem().toString();
+        String sql = "select Nome, Estatuto from Funcionarios where Estatuto like '"+estatutop+"%'" ;
+        lerTabelaEstatuto(sql);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jMenuItemPesquisaContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisaContribuinteActionPerformed
+        this.lerDadosTabelaPsqNumContribuinte();
+        jDialogPesquisaNumContribuinte.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesquisaContribuinteActionPerformed
+
+    private void jFormattedTextFieldNContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNContribuinteActionPerformed
+        String contribuintep = jFormattedTextFieldNContribuinte.getText();
+        String sql = "select Nome, Contribuinte from Funcionarios where Contribuinte like '"+contribuintep+"%'" ;
+        lerTabelaNumContribuinte(sql);
+    }//GEN-LAST:event_jFormattedTextFieldNContribuinteActionPerformed
+
+    private void jFormattedTextFieldNumContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNumContribuinteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldNumContribuinteActionPerformed
     
     private void lerEstatutosBDJComboBox() {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
@@ -582,6 +810,33 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             while (rs.next()) {
                 String estatuto = rs.getString("Nome");
                 jComboBoxEstatutos.addItem(estatuto);
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+    
+    private void lerEstatutosBDJComboBox2() {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from Estatutos order by Nome");
+
+            jComboBox1.removeAllItems();
+            jComboBox1.addItem("-- Escolha o estatuto --");
+            while (rs.next()) {
+                String estatuto = rs.getString("Nome");
+                jComboBox1.addItem(estatuto);
             }
             stmt.close();
             con.close();
@@ -635,28 +890,28 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         // Fim LerBD
     }
 
-//    public boolean validaNif(String nif) {
-//        int max = 9;
-////        nif = jFormattedTextFieldNumContribuinte.getText();
-//        try {
-//            if (!nif.matches("[0-9]") || nif.length() != max) {
-//                return false;
-//            }
-//            int checkSum = 0;
-//            //calcula a soma de controlo
-//            for (int i = 0; i < max - 1; i++) {
-//                checkSum += (nif.charAt(i) - '0') * (max - i);
-//            }
-//            int checkDigit = 11 - (checkSum % 11);
-//            if (checkDigit >= 10) {
-//                checkDigit = 0;
-//            }
-//            return checkDigit == nif.charAt(max - 1) - '0';
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(jFormattedTextFieldNumContribuinte, "Campo Vazio e incorreto!!!", e.getMessage(), JOptionPane.ERROR_MESSAGE);
-//        }
-//        return false;
-//    }
+    public boolean validaNif(String nif) {
+        int max = 9;
+//        nif = jFormattedTextFieldNumContribuinte.getText();
+        try {
+            if (!nif.matches("[0-9]") || nif.length() != max) {
+                return false;
+            }
+            int checkSum = 0;
+            //calcula a soma de controlo
+            for (int i = 0; i < max - 1; i++) {
+                checkSum += (nif.charAt(i) - '0') * (max - i);
+            }
+            int checkDigit = 11 - (checkSum % 11);
+            if (checkDigit >= 10) {
+                checkDigit = 0;
+            }
+            return checkDigit == nif.charAt(max - 1) - '0';
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(jFormattedTextFieldNumContribuinte, "Campo Vazio e incorreto!!!", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
 
     public void lerDadosTabela(){
         DefaultTableModel modelo = (DefaultTableModel) jTableFuncionarios.getModel();
@@ -744,6 +999,79 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                     salario,
                     horas,
                     bonus
+                };
+                modelo.addRow(rowData);
+            }
+            stmt.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }  
+    }
+    
+    public void lerDadosTabelaPsqEstatuto(){
+        DefaultTableModel modelo = (DefaultTableModel) jTableEstatuto.getModel();
+        modelo.setRowCount(0);
+
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            String nomeTabela = "Funcionarios";
+            ResultSet rs = stmt.executeQuery("select * from " + nomeTabela);
+
+            while (rs.next()) {
+                String estatuto = rs.getString("Estatuto");
+                String nome = rs.getString("Nome");
+                
+                Object[] rowData = {
+                    estatuto,
+                    nome
+                };
+                modelo.addRow(rowData);
+            }
+            stmt.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }  
+    }
+    
+    public void lerDadosTabelaPsqNumContribuinte(){
+        DefaultTableModel modelo = (DefaultTableModel) jTableNContribuinte.getModel();
+        modelo.setRowCount(0);
+
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            String nomeTabela = "Funcionarios";
+            ResultSet rs = stmt.executeQuery("select * from " + nomeTabela);
+
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String ncontribuinte = rs.getString("Contribuinte");
+                Object[] rowData = {
+                    nome,
+                    ncontribuinte
                 };
                 modelo.addRow(rowData);
             }
@@ -850,7 +1178,81 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
         
     }
+    
+    private void lerTabelaEstatuto(String sql){
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch(java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            DefaultTableModel modelo = (DefaultTableModel)jTableEstatuto.getModel();
+            modelo.setRowCount(0);
+            while (rs.next()) {	
+            	String estatuto = rs.getString("Estatuto");
+                String nome = rs.getString("Nome");
+                
+                Object [] dados ={ 
+                    estatuto,
+                    nome
+                };
+                modelo.addRow(dados);
+            }
+            stmt.close();
+            con.close();
+
+        } catch(SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+        
+    }
   
+    private void lerTabelaNumContribuinte(String sql){
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch(java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            DefaultTableModel modelo = (DefaultTableModel)jTableNContribuinte.getModel();
+            modelo.setRowCount(0);
+            while (rs.next()) {	
+            	String ncontribuinte = rs.getString("Contribuinte");
+                String nome = rs.getString("Nome");
+                
+                Object [] dados ={ 
+                    nome,
+                    ncontribuinte
+                };
+                modelo.addRow(dados);
+            }
+            stmt.close();
+            con.close();
+
+        } catch(SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -889,16 +1291,22 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton Atualizar;
     private javax.swing.JButton jButtonInserir;
     private javax.swing.JButton jButtonLimpar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxEstatutos;
     private javax.swing.JDialog jDialogInserirFunc;
+    private javax.swing.JDialog jDialogPesquisaEstatuto;
     private javax.swing.JDialog jDialogPesquisaNome;
+    private javax.swing.JDialog jDialogPesquisaNumContribuinte;
     private javax.swing.JDialog jDialogVerFuncionarios;
     private javax.swing.JDialog jDialogVerTabelaDeFuncionarios;
     private javax.swing.JFormattedTextField jFormattedTextFieldIBAN;
+    private javax.swing.JFormattedTextField jFormattedTextFieldNContribuinte;
     private javax.swing.JFormattedTextField jFormattedTextFieldNumContribuinte;
     private javax.swing.JFormattedTextField jFormattedTextFieldTelemovel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelEstatuto;
     private javax.swing.JLabel jLabelHoras;
     private javax.swing.JLabel jLabelIBAN;
@@ -910,7 +1318,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuInserir;
     private javax.swing.JMenuItem jMenuItemInserirFunc;
+    private javax.swing.JMenuItem jMenuItemPesqEstatuto;
     private javax.swing.JMenuItem jMenuItemPesqNome;
+    private javax.swing.JMenuItem jMenuItemPesquisaContribuinte;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemVerFuncionarios;
     private javax.swing.JMenuItem jMenuItemVerTabela;
@@ -919,10 +1329,18 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTableEstatuto;
     private javax.swing.JTable jTableFuncionarios;
+    private javax.swing.JTable jTableNContribuinte;
     private javax.swing.JTable jTablePesqNome;
     private javax.swing.JTextArea jTextAreaOutput;
     private javax.swing.JTextField jTextField1;
@@ -936,6 +1354,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     MaskFormatter formatter1;
     MaskFormatter formatter2;
     MaskFormatter formatter3;
+    MaskFormatter formatter4;
     private double bonusHora = 0;
     private double salarioTotal = 0; 
     
