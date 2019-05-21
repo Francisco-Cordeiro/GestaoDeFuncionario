@@ -12,7 +12,7 @@ package gestaodefuncionariosdesupermercados;
 
 public class Funcionarios {
     
-    public Funcionarios(String nome, String estatuto, String ncontribuinte, String telemovel, String iban, double salario, double  horas) {
+    public Funcionarios(String nome, String estatuto, String ncontribuinte, String telemovel, String iban, double salario, double  horas ) {
         this.nome = nome; 
         this.estatuto = estatuto;
         this.ncontribuinte = ncontribuinte;
@@ -40,6 +40,11 @@ public class Funcionarios {
     private double salario;
     private double horas;
 
+    private double bonusHora = 0;
+    private double salarioTotal = 0;
+
+    
+    
     public String getNome() {
         return nome;
     }
@@ -96,7 +101,10 @@ public class Funcionarios {
         this.horas = horas;
     }
     
+    public double bonusPorHora() {    //não retorna o valor 
+        bonusHora = 5.0 *getHoras();
+        salarioTotal = getSalario() + bonusHora;
+        return salarioTotal;
+    }
    
-
-  
 }

@@ -22,8 +22,7 @@ public class GestaoFuncionarios {
     //variaveis
     private ArrayList<Funcionarios> tFuncionarios;
     Funcionarios fu;
-    private double bonusHora = 0;
-    private double salarioTotal = 0;
+    
     
     public void inserirFuncionarios(String nome, String estatuto,
             String ncontribuinte, String telemovel, String nib, double salario, double horas) {
@@ -33,15 +32,25 @@ public class GestaoFuncionarios {
     public String verTodos() {
         String output = "";
         for (int i = 0; i < tFuncionarios.size(); i++) {
-            output += tFuncionarios.get(i).toString();
+            output = tFuncionarios.get(i).toString();
         }
         return output;
     }
     
-    public double bonusPorHora() {    //não retorna o valor 
-        bonusHora = 5.0 *fu.getHoras();
-        salarioTotal = fu.getSalario() + bonusHora;
-        return salarioTotal;
+    @Override
+    public String toString(){
+        String output = "";
+        String linha = "-------------------\n";
+        output = linha+"Nome: "+fu.getNome()+"\n"+
+                "Estatuto: "+fu.getEstatuto()+"\n"+
+                "Número de Contribuinte: "+fu.getNcontribuinte()+"\n"+
+                "Telemovel: "+fu.getTelemovel()+"\n"+ 
+                "Iban: "+fu.getIBAN()+"\n"+
+                "Horas:"+fu.getHoras()+"\n"+
+                "Salário: "+fu.getSalario()+"\n"+
+                "Salário com Bonus: "+fu.bonusPorHora()+"\n"+
+                linha;
+        return output;
     }
     
     //pesquisa por nome 
@@ -51,7 +60,7 @@ public class GestaoFuncionarios {
         for (int i = 0; i < tFuncionarios.size(); i++) {
             Funcionarios f = tFuncionarios.get(i);
             if (f.getNome().equalsIgnoreCase(nomep)) {
-                output += f.getNome();
+                output = fu.toString();
                 existe = true;
             }
         }
@@ -182,7 +191,6 @@ public class GestaoFuncionarios {
     }
 
     //gets e sets do array
-
     public ArrayList<Funcionarios> gettFuncionarios() {
         return tFuncionarios;
     }
@@ -190,5 +198,7 @@ public class GestaoFuncionarios {
     public void settFuncionarios(ArrayList<Funcionarios> tFuncionarios) {
         this.tFuncionarios = tFuncionarios;
     }
+
+    
     
 }
