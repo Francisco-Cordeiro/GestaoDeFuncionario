@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -76,7 +75,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jDialogPesquisaNome = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldPesqNome = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePesqNome = new javax.swing.JTable();
@@ -94,6 +93,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableNContribuinte = new javax.swing.JTable();
+        jDialogPesqTelemovel = new javax.swing.JDialog();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableTelemovel = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -108,6 +114,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jMenuItemPesqNome = new javax.swing.JMenuItem();
         jMenuItemPesqEstatuto = new javax.swing.JMenuItem();
         jMenuItemPesquisaContribuinte = new javax.swing.JMenuItem();
+        jMenuItemPesqTelemovel = new javax.swing.JMenuItem();
 
         jDialogInserirFunc.setTitle("Inserir Funcionarios");
         jDialogInserirFunc.setMinimumSize(new java.awt.Dimension(870, 570));
@@ -250,7 +257,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         });
 
         Atualizar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        Atualizar.setText("Atualizar");
+        Atualizar.setText("Imprimir");
         Atualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AtualizarActionPerformed(evt);
@@ -278,9 +285,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(Atualizar)
+                    .addComponent(jButtonLimpar))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jDialogVerTabelaDeFuncionarios.setTitle("Tabela de Funcionarios");
@@ -330,9 +337,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nome:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldPesqNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextFieldPesqNomeActionPerformed(evt);
             }
         });
 
@@ -344,7 +351,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap(405, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldPesqNome, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(269, 269, 269))
         );
         jPanel2Layout.setVerticalGroup(
@@ -353,7 +360,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGap(88, 88, 88)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldPesqNome, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
 
@@ -598,6 +605,96 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPesqTelemovel.setMinimumSize(new java.awt.Dimension(916, 730));
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Telemovel:");
+
+        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextField1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(340, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextField1))
+                .addContainerGap(198, Short.MAX_VALUE))
+        );
+
+        jTableTelemovel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Telemovel"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(jTableTelemovel);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jDialogPesqTelemovelLayout = new javax.swing.GroupLayout(jDialogPesqTelemovel.getContentPane());
+        jDialogPesqTelemovel.getContentPane().setLayout(jDialogPesqTelemovelLayout);
+        jDialogPesqTelemovelLayout.setHorizontalGroup(
+            jDialogPesqTelemovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogPesqTelemovelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogPesqTelemovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialogPesqTelemovelLayout.setVerticalGroup(
+            jDialogPesqTelemovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogPesqTelemovelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestáo de Funcionarios");
         setMinimumSize(new java.awt.Dimension(943, 729));
@@ -687,6 +784,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         });
         jMenuPesquisar.add(jMenuItemPesquisaContribuinte);
 
+        jMenuItemPesqTelemovel.setText("Pesquisar Telemovel");
+        jMenuItemPesqTelemovel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesqTelemovelActionPerformed(evt);
+            }
+        });
+        jMenuPesquisar.add(jMenuItemPesqTelemovel);
+
         jMenuBar1.add(jMenuPesquisar);
 
         setJMenuBar(jMenuBar1);
@@ -721,16 +826,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemInserirFuncActionPerformed
 
     private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
-        String nome = jTextFieldNome.getText();
-        String estatuto = jComboBoxEstatutos.getSelectedItem().toString();
-        String ncontribuinte = jFormattedTextFieldNumContribuinte.getText();
-        String telemovel = jFormattedTextFieldTelemovel.getText();
-        String iban = jFormattedTextFieldIBAN.getText();
-        double salario = Double.parseDouble(jTextFieldSalario.getText());
-        double horas = Double.parseDouble(jTextFieldHoras.getText());
-        d.inserirFuncionarios(nome, estatuto, ncontribuinte, telemovel, iban, salario, horas);
         this.inserirDadosBD();
-        this.validaNif(ncontribuinte);
         this.limpaCampos();
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
@@ -751,14 +847,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         this.lerBDTextArea();
     }//GEN-LAST:event_AtualizarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        String nomep = jTextFieldNome.getText();
+    private void jTextFieldPesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesqNomeActionPerformed
+        String nomep = jTextFieldPesqNome.getText();
         String sql = "select * from Funcionarios where Nome like '" + nomep + "%'";
         this.lerTabelaNo(sql);
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextFieldPesqNomeActionPerformed
 
     private void jMenuItemPesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqNomeActionPerformed
-        this.lerDadosTabelaPsqNome();
+        //this.lerDadosTabelaPsqNome();
         jDialogPesquisaNome.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesqNomeActionPerformed
 
@@ -786,8 +882,19 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldNContribuinteActionPerformed
 
     private void jFormattedTextFieldNumContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNumContribuinteActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jFormattedTextFieldNumContribuinteActionPerformed
+
+    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+        String telemovelp = jFormattedTextFieldTelemovel.getText();
+        String sql = "select Nome, Telemovel from Funcionarios where Telemovel like '" + telemovelp + "%'";
+        lerTabelaTelemovel(sql);
+    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+
+    private void jMenuItemPesqTelemovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqTelemovelActionPerformed
+        lerDadosTabelaPsqTelemovel();
+        jDialogPesqTelemovel.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesqTelemovelActionPerformed
 
     private void lerEstatutosBDJComboBox() {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
@@ -903,29 +1010,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    public boolean validaNif(String nif) {
-        int max = 9;
-//        nif = jFormattedTextFieldNumContribuinte.getText();
-        try {
-            if (!nif.matches("[0-9]") || nif.length() != max) {
-                return false;
-            }
-            int checkSum = 0;
-            //calcula a soma de controlo
-            for (int i = 0; i < max - 1; i++) {
-                checkSum += (nif.charAt(i) - '0') * (max - i);
-            }
-            int checkDigit = 11 - (checkSum % 11);
-            if (checkDigit >= 10) {
-                checkDigit = 0;
-            }
-            return checkDigit == nif.charAt(max - 1) - '0';
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(jFormattedTextFieldNumContribuinte, "Campo Vazio e incorreto!!!", e.getMessage(), JOptionPane.ERROR_MESSAGE);
-        }
-        return false;
-    }
-
     public void lerDadosTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTableFuncionarios.getModel();
         modelo.setRowCount(0);
@@ -1033,14 +1117,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
-
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (java.lang.ClassNotFoundException e) {
             System.err.print("ClassNotFoundException: ");
             System.err.println(e.getMessage());
         }
-
         try {
             con = DriverManager.getConnection(url);
             stmt = con.createStatement();
@@ -1070,11 +1152,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
             stmt.close();
             con.close();
-
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
-
     }
 
     public void lerDadosTabelaPsqEstatuto() {
@@ -1218,14 +1298,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
-
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (java.lang.ClassNotFoundException e) {
             System.err.print("ClassNotFoundException: ");
             System.err.println(e.getMessage());
         }
-
         try {
             con = DriverManager.getConnection(url);
             stmt = con.createStatement();
@@ -1244,13 +1322,80 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
             stmt.close();
             con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+
+     public void lerDadosTabelaPsqTelemovel() {
+        DefaultTableModel modelo = (DefaultTableModel) jTableTelemovel.getModel();
+        modelo.setRowCount(0);
+
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            String nomeTabela = "Funcionarios";
+            ResultSet rs = stmt.executeQuery("select Nome, Telemovel from " + nomeTabela);
+
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String telemovel = rs.getString("Telemovel");
+                Object[] rowData = {
+                    nome,
+                    telemovel
+                };
+                modelo.addRow(rowData);
+            }
+            stmt.close();
+            con.close();
 
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
-
     }
 
+    private void lerTabelaTelemovel(String sql) {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            DefaultTableModel modelo = (DefaultTableModel) jTableTelemovel.getModel();
+            modelo.setRowCount(0);
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String telemovel = rs.getString("Telemovel");
+                
+                Object[] dados = {
+                    nome,
+                    telemovel
+                };
+                modelo.addRow(dados);
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1292,11 +1437,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxEstatutos;
     private javax.swing.JDialog jDialogInserirFunc;
+    private javax.swing.JDialog jDialogPesqTelemovel;
     private javax.swing.JDialog jDialogPesquisaEstatuto;
     private javax.swing.JDialog jDialogPesquisaNome;
     private javax.swing.JDialog jDialogPesquisaNumContribuinte;
     private javax.swing.JDialog jDialogVerFuncionarios;
     private javax.swing.JDialog jDialogVerTabelaDeFuncionarios;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextFieldIBAN;
     private javax.swing.JFormattedTextField jFormattedTextFieldNContribuinte;
     private javax.swing.JFormattedTextField jFormattedTextFieldNumContribuinte;
@@ -1305,6 +1452,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelEstatuto;
     private javax.swing.JLabel jLabelHoras;
     private javax.swing.JLabel jLabelIBAN;
@@ -1318,6 +1466,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemInserirFunc;
     private javax.swing.JMenuItem jMenuItemPesqEstatuto;
     private javax.swing.JMenuItem jMenuItemPesqNome;
+    private javax.swing.JMenuItem jMenuItemPesqTelemovel;
     private javax.swing.JMenuItem jMenuItemPesquisaContribuinte;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemVerFuncionarios;
@@ -1331,19 +1480,23 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTableEstatuto;
     private javax.swing.JTable jTableFuncionarios;
     private javax.swing.JTable jTableNContribuinte;
     private javax.swing.JTable jTablePesqNome;
+    private javax.swing.JTable jTableTelemovel;
     private javax.swing.JTextArea jTextAreaOutput;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldHoras;
     private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldPesqNome;
     private javax.swing.JTextField jTextFieldSalario;
     // End of variables declaration//GEN-END:variables
 
