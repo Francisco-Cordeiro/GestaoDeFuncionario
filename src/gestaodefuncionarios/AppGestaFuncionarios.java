@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gestaodefuncionariosdesupermercados;
+package gestaodefuncionarios;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -121,6 +122,22 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         jTableHoras = new javax.swing.JTable();
+        jDialogPesqSalarioComBonus = new javax.swing.JDialog();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jTextFieldSalarioComBonus = new javax.swing.JTextField();
+        jPanel19 = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTableSalarioBonus = new javax.swing.JTable();
+        jDialogpPesqSalarioEntreDoisValores = new javax.swing.JDialog();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jPanel17 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTableSalario2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -139,6 +156,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jMenuItemPesqIBAN = new javax.swing.JMenuItem();
         jMenuItemPesqSalario = new javax.swing.JMenuItem();
         jMenuItempPesqHoras = new javax.swing.JMenuItem();
+        jMenuItemPesqSalarioComBonus = new javax.swing.JMenuItem();
+        jMenuItemPesquisarSalEntreDoisValores = new javax.swing.JMenuItem();
 
         jDialogInserirFunc.setTitle("Inserir Funcionarios");
         jDialogInserirFunc.setMinimumSize(new java.awt.Dimension(870, 570));
@@ -991,23 +1010,218 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPesqSalarioComBonus.setMinimumSize(new java.awt.Dimension(930, 889));
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setText("Salario com Bonus:");
+
+        jTextFieldSalarioComBonus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSalarioComBonusActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(264, 264, 264)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldSalarioComBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(303, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jTextFieldSalarioComBonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(199, Short.MAX_VALUE))
+        );
+
+        jPanel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTableSalarioBonus.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Salário com Bonus"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane11.setViewportView(jTableSalarioBonus);
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane11)
+                .addContainerGap())
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialogPesqSalarioComBonusLayout = new javax.swing.GroupLayout(jDialogPesqSalarioComBonus.getContentPane());
+        jDialogPesqSalarioComBonus.getContentPane().setLayout(jDialogPesqSalarioComBonusLayout);
+        jDialogPesqSalarioComBonusLayout.setHorizontalGroup(
+            jDialogPesqSalarioComBonusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogPesqSalarioComBonusLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogPesqSalarioComBonusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialogPesqSalarioComBonusLayout.setVerticalGroup(
+            jDialogPesqSalarioComBonusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogPesqSalarioComBonusLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jDialogpPesqSalarioEntreDoisValores.setTitle("Pesquisar Salário Entre Dois Valores");
+        jDialogpPesqSalarioEntreDoisValores.setMinimumSize(new java.awt.Dimension(934, 850));
+
+        jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Salário entre");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("e");
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(273, 273, 273)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(355, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(172, Short.MAX_VALUE))
+        );
+
+        jPanel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTableSalario2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Salário"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane10.setViewportView(jTableSalario2);
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane10)
+                .addContainerGap())
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialogpPesqSalarioEntreDoisValoresLayout = new javax.swing.GroupLayout(jDialogpPesqSalarioEntreDoisValores.getContentPane());
+        jDialogpPesqSalarioEntreDoisValores.getContentPane().setLayout(jDialogpPesqSalarioEntreDoisValoresLayout);
+        jDialogpPesqSalarioEntreDoisValoresLayout.setHorizontalGroup(
+            jDialogpPesqSalarioEntreDoisValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogpPesqSalarioEntreDoisValoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogpPesqSalarioEntreDoisValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialogpPesqSalarioEntreDoisValoresLayout.setVerticalGroup(
+            jDialogpPesqSalarioEntreDoisValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogpPesqSalarioEntreDoisValoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gestáo de Funcionarios");
+        setTitle("Gestão de Funcionarios");
         setMinimumSize(new java.awt.Dimension(947, 738));
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(500, 500));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setMinimumSize(new java.awt.Dimension(923, 686));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Supermercado.jpg"))); // NOI18N
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jMenu1.setText("Aplicação");
@@ -1112,6 +1326,22 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         });
         jMenuPesquisar.add(jMenuItempPesqHoras);
 
+        jMenuItemPesqSalarioComBonus.setText("Pesquisar Salario Com Bonus");
+        jMenuItemPesqSalarioComBonus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesqSalarioComBonusActionPerformed(evt);
+            }
+        });
+        jMenuPesquisar.add(jMenuItemPesqSalarioComBonus);
+
+        jMenuItemPesquisarSalEntreDoisValores.setText("Pesquisar Salários Entre Dois Valores");
+        jMenuItemPesquisarSalEntreDoisValores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesquisarSalEntreDoisValoresActionPerformed(evt);
+            }
+        });
+        jMenuPesquisar.add(jMenuItemPesquisarSalEntreDoisValores);
+
         jMenuBar1.add(jMenuPesquisar);
 
         setJMenuBar(jMenuBar1);
@@ -1120,14 +1350,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1249,6 +1479,22 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jDialogPesqHora.setVisible(true);
     }//GEN-LAST:event_jMenuItempPesqHorasActionPerformed
 
+    private void jMenuItemPesquisarSalEntreDoisValoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisarSalEntreDoisValoresActionPerformed
+        lerDadosTabelaPsqSalarios();
+        jDialogpPesqSalarioEntreDoisValores.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesquisarSalEntreDoisValoresActionPerformed
+
+    private void jMenuItemPesqSalarioComBonusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqSalarioComBonusActionPerformed
+        lerDadosTabelaPsqSalarioComBonus();
+        jDialogPesqSalarioComBonus.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesqSalarioComBonusActionPerformed
+
+    private void jTextFieldSalarioComBonusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSalarioComBonusActionPerformed
+        String salariobp = jTextFieldSalarioComBonus.getText();
+        String sql = "select Nome, Bonus from Funcionarios where Bonus like '" + salariobp + "%'";
+        lerTabelaSalrioComBonus(sql);
+    }//GEN-LAST:event_jTextFieldSalarioComBonusActionPerformed
+
     private void lerEstatutosBDJComboBox() {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
@@ -1334,7 +1580,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         try {
             con = DriverManager.getConnection(url);
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from Funcionarios order by nome");
+            ResultSet rs = stmt.executeQuery("select * from Funcionarios order by Nome");
 
             while (rs.next()) {
                 String nome = rs.getString("Nome");
@@ -1366,7 +1612,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     public void lerDadosTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTableFuncionarios.getModel();
         modelo.setRowCount(0);
-
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -1381,7 +1626,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             stmt = con.createStatement();
             String nomeTabela = "Funcionarios";
             ResultSet rs = stmt.executeQuery("select * from " + nomeTabela);
-
             while (rs.next()) {
                 String nome = rs.getString("Nome");
                 String estatuto = rs.getString("Estatuto");
@@ -1402,11 +1646,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                     bonus
                 };
                 modelo.addRow(rowData);
-
             }
             stmt.close();
             con.close();
-
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
@@ -1956,6 +2198,148 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
     
+    public void lerDadosTabelaPsqSalarioComBonus() {
+        DefaultTableModel modelo = (DefaultTableModel) jTableSalarioBonus.getModel();
+        modelo.setRowCount(0);
+
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            String nomeTabela = "Funcionarios";
+            ResultSet rs = stmt.executeQuery("select * from " + nomeTabela);
+
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String bonus = rs.getString("Bonus");
+                Object[] rowData = {
+                    nome,
+                    bonus
+                };
+                modelo.addRow(rowData);
+            }
+            stmt.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+
+    private void lerTabelaSalrioComBonus(String sql) {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            DefaultTableModel modelo = (DefaultTableModel) jTableSalarioBonus.getModel();
+            modelo.setRowCount(0);
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String bonus = rs.getString("Bonus");
+                Object[] dados = {
+                    nome,
+                    bonus
+                };
+                modelo.addRow(dados);
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+    
+    public void lerDadosTabelaPsqSalarios() {
+        DefaultTableModel modelo = (DefaultTableModel) jTableSalario2.getModel();
+        modelo.setRowCount(0);
+
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            String nomeTabela = "Funcionarios";
+            ResultSet rs = stmt.executeQuery("select * from " + nomeTabela);
+
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String salario = rs.getString("Salário");
+                Object[] rowData = {
+                    nome,
+                    salario
+                };
+                modelo.addRow(rowData);
+            }
+            stmt.close();
+            con.close();
+
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+
+    private void lerTabelaSalrios(String sql) {
+        String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
+        Connection con;
+        Statement stmt;
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (java.lang.ClassNotFoundException e) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(url);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            DefaultTableModel modelo = (DefaultTableModel) jTableSalario2.getModel();
+            modelo.setRowCount(0);
+            while (rs.next()) {
+                String nome = rs.getString("Nome");
+                String salario = rs.getString("Salário");
+                
+                Object[] dados = {
+                    nome,
+                    salario
+                };
+                modelo.addRow(dados);
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+    
+    private double salariosEntreDoisValores(double salarioMin, double salarioMax){
+        
+        return 0;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -2001,12 +2385,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JDialog jDialogPesqHora;
     private javax.swing.JDialog jDialogPesqIBAN;
     private javax.swing.JDialog jDialogPesqSalario;
+    private javax.swing.JDialog jDialogPesqSalarioComBonus;
     private javax.swing.JDialog jDialogPesqTelemovel;
     private javax.swing.JDialog jDialogPesquisaEstatuto;
     private javax.swing.JDialog jDialogPesquisaNome;
     private javax.swing.JDialog jDialogPesquisaNumContribuinte;
     private javax.swing.JDialog jDialogVerFuncionarios;
     private javax.swing.JDialog jDialogVerTabelaDeFuncionarios;
+    private javax.swing.JDialog jDialogpPesqSalarioEntreDoisValores;
     private javax.swing.JFormattedTextField jFormattedTextFieldIBAN;
     private javax.swing.JFormattedTextField jFormattedTextFieldIBAN2;
     private javax.swing.JFormattedTextField jFormattedTextFieldNContribuinte;
@@ -2014,6 +2400,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldTelemovel;
     private javax.swing.JFormattedTextField jFormattedTextFieldTelemovel2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2021,6 +2409,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelEstatuto;
     private javax.swing.JLabel jLabelHoras;
     private javax.swing.JLabel jLabelIBAN;
@@ -2036,8 +2425,10 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemPesqIBAN;
     private javax.swing.JMenuItem jMenuItemPesqNome;
     private javax.swing.JMenuItem jMenuItemPesqSalario;
+    private javax.swing.JMenuItem jMenuItemPesqSalarioComBonus;
     private javax.swing.JMenuItem jMenuItemPesqTelemovel;
     private javax.swing.JMenuItem jMenuItemPesquisaContribuinte;
+    private javax.swing.JMenuItem jMenuItemPesquisarSalEntreDoisValores;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemVerFuncionarios;
     private javax.swing.JMenuItem jMenuItemVerTabela;
@@ -2051,6 +2442,10 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2060,6 +2455,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2075,16 +2472,20 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JTable jTableNContribuinte;
     private javax.swing.JTable jTablePesqNome;
     private javax.swing.JTable jTableSalario;
+    private javax.swing.JTable jTableSalario2;
+    private javax.swing.JTable jTableSalarioBonus;
     private javax.swing.JTable jTableTelemovel;
     private javax.swing.JTextArea jTextAreaOutput;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldHora2;
     private javax.swing.JTextField jTextFieldHoras;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPesqNome;
     private javax.swing.JTextField jTextFieldSalario;
     private javax.swing.JTextField jTextFieldSalario2;
+    private javax.swing.JTextField jTextFieldSalarioComBonus;
     // End of variables declaration//GEN-END:variables
-
     GestaoFuncionarios d = new GestaoFuncionarios();
     Funcionarios fu;
     MaskFormatter formatter1;
@@ -2093,4 +2494,5 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     MaskFormatter formatter4;
     private double bonusHora = 0;
     private double salarioTotal = 0;
+    ArrayList<Double> Func = new ArrayList<>();
 }
