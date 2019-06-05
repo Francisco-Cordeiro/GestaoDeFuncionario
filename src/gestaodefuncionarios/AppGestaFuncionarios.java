@@ -34,10 +34,6 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             formatter1 = new MaskFormatter("#########");//nc
             formatter2 = new MaskFormatter("9########");//tele
             formatter3 = new MaskFormatter("PT50 #### #### ########### ##");//IBAN
-            
-            formatter4 = new MaskFormatter("#########");//nc pesq
-            formatter5 = new MaskFormatter("9#######");//telemovel pesq
-            formatter6 = new MaskFormatter("PT50 #### #### ########### ##");//IBAN pesq
         } catch (ParseException ex) {
             Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2763,9 +2759,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSalarioComBonus;
     private javax.swing.JTextField jTextFieldTelemovel;
     // End of variables declaration//GEN-END:variables
-    
-    
-    
+
     MaskFormatter formatter1;
     MaskFormatter formatter2;
     MaskFormatter formatter3;
@@ -2774,7 +2768,5 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     MaskFormatter formatter6;
     private double bonusHora = 0;
     private double salarioTotal = 0;
-    
-    
-    
+
 }
