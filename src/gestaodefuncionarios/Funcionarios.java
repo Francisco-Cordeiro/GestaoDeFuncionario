@@ -101,10 +101,9 @@ public class Funcionarios {
         this.horas = horas;
     }
     
-    public double bonusPorHora() {    //não retorna o valor 
-        bonusHora = 5.0 *getHoras();
+    public double bonusPorHora() {
+        bonusHora = 5.0 * getHoras();
         salarioTotal = getSalario() + bonusHora;
         return salarioTotal;
     }
-   
 }
