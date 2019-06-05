@@ -11,9 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.util.ArrayList;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -27,13 +29,15 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
      * Creates new form AppGestaFuncionarios
      */
     public AppGestaFuncionarios() {
-        this.fu = new Funcionarios();
-
+        
         try {
             formatter1 = new MaskFormatter("#########");//nc
             formatter2 = new MaskFormatter("9########");//tele
             formatter3 = new MaskFormatter("PT50 #### #### ########### ##");//IBAN
+            
             formatter4 = new MaskFormatter("#########");//nc pesq
+            formatter5 = new MaskFormatter("9#######");//telemovel pesq
+            formatter6 = new MaskFormatter("PT50 #### #### ########### ##");//IBAN pesq
         } catch (ParseException ex) {
             Logger.getLogger(AppGestaFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,7 +59,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabelEstatuto = new javax.swing.JLabel();
         jComboBoxEstatutos = new javax.swing.JComboBox<>();
         jLabelNúmeroDeContribuinte = new javax.swing.JLabel();
-        jFormattedTextFieldNumContribuinte = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldNumContribuinte = new javax.swing.JFormattedTextField(formatter1);
         jLabelTelemovel = new javax.swing.JLabel();
         jFormattedTextFieldTelemovel = new javax.swing.JFormattedTextField(formatter2);
         jLabelIBAN = new javax.swing.JLabel();
@@ -66,10 +70,11 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jTextFieldHoras = new javax.swing.JTextField();
         jButtonInserir = new javax.swing.JButton();
         jDialogVerFuncionarios = new javax.swing.JDialog();
+        jPanel20 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaOutput = new javax.swing.JTextArea();
-        jButtonLimpar = new javax.swing.JButton();
         Atualizar = new javax.swing.JButton();
+        jButtonLimpar = new javax.swing.JButton();
         jDialogVerTabelaDeFuncionarios = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableFuncionarios = new javax.swing.JTable();
@@ -77,6 +82,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldPesqNome = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePesqNome = new javax.swing.JTable();
@@ -84,27 +90,31 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxEstatuto2 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableEstatuto = new javax.swing.JTable();
         jDialogPesquisaNumContribuinte = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextFieldNContribuinte = new javax.swing.JFormattedTextField();
+        jTextFieldNContribuinte = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableNContribuinte = new javax.swing.JTable();
         jDialogPesqTelemovel = new javax.swing.JDialog();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextFieldTelemovel2 = new javax.swing.JFormattedTextField();
+        jTextFieldTelemovel = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTelemovel = new javax.swing.JTable();
         jDialogPesqIBAN = new javax.swing.JDialog();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jFormattedTextFieldIBAN2 = new javax.swing.JFormattedTextField();
+        jTextFieldIBAN = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableIBAN = new javax.swing.JTable();
@@ -112,6 +122,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldSalario2 = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTableSalario = new javax.swing.JTable();
@@ -119,6 +130,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldHora2 = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         jTableHoras = new javax.swing.JTable();
@@ -126,15 +138,17 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jTextFieldSalarioComBonus = new javax.swing.JTextField();
+        jButton9 = new javax.swing.JButton();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTableSalarioBonus = new javax.swing.JTable();
         jDialogpPesqSalarioEntreDoisValores = new javax.swing.JDialog();
         jPanel16 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldMin = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldMax = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTableSalario2 = new javax.swing.JTable();
@@ -165,6 +179,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabelNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelNome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelNome.setText("Nome:");
+
+        jTextFieldNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldNomeFocusLost(evt);
+            }
+        });
 
         jLabelEstatuto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelEstatuto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -283,12 +303,22 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
         jDialogVerFuncionarios.setTitle("Ver Funcionarios");
         jDialogVerFuncionarios.setLocationByPlatform(true);
-        jDialogVerFuncionarios.setMinimumSize(new java.awt.Dimension(891, 681));
+        jDialogVerFuncionarios.setMinimumSize(new java.awt.Dimension(900, 651));
+
+        jPanel20.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTextAreaOutput.setColumns(20);
         jTextAreaOutput.setRows(5);
         jTextAreaOutput.setMinimumSize(new java.awt.Dimension(867, 611));
         jScrollPane1.setViewportView(jTextAreaOutput);
+
+        Atualizar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Atualizar.setText("Imprimir");
+        Atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarActionPerformed(evt);
+            }
+        });
 
         jButtonLimpar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonLimpar.setText("Limpar");
@@ -299,38 +329,43 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
         });
 
-        Atualizar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        Atualizar.setText("Imprimir");
-        Atualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AtualizarActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel20Layout.createSequentialGroup()
+                        .addComponent(Atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 550, Short.MAX_VALUE)
+                        .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Atualizar)
+                    .addComponent(jButtonLimpar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jDialogVerFuncionariosLayout = new javax.swing.GroupLayout(jDialogVerFuncionarios.getContentPane());
         jDialogVerFuncionarios.getContentPane().setLayout(jDialogVerFuncionariosLayout);
         jDialogVerFuncionariosLayout.setHorizontalGroup(
             jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialogVerFuncionariosLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogVerFuncionariosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jDialogVerFuncionariosLayout.createSequentialGroup()
-                        .addComponent(Atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 578, Short.MAX_VALUE)
-                        .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialogVerFuncionariosLayout.setVerticalGroup(
             jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialogVerFuncionariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jDialogVerFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Atualizar)
-                    .addComponent(jButtonLimpar))
-                .addContainerGap(19, Short.MAX_VALUE))
+            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jDialogVerTabelaDeFuncionarios.setTitle("Tabela de Funcionarios");
@@ -386,15 +421,26 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("Procurar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(405, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldPesqNome, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldPesqNome, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(269, 269, 269))
         );
         jPanel2Layout.setVerticalGroup(
@@ -404,7 +450,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldPesqNome, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jButton2)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -440,7 +488,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -465,6 +513,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPesquisaEstatuto.setTitle("Pesquisar Estatuto");
         jDialogPesquisaEstatuto.setMinimumSize(new java.awt.Dimension(947, 738));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -478,15 +527,26 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton3.setText("Procurar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(317, 317, 317)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBoxEstatuto2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxEstatuto2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(462, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -496,7 +556,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboBoxEstatuto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jButton3)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -557,15 +619,24 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPesquisaNumContribuinte.setTitle("Pesquisar Número de Contribuinte");
         jDialogPesquisaNumContribuinte.setMinimumSize(new java.awt.Dimension(1056, 808));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel4.setText("Número de Contribuinte:");
 
-        jFormattedTextFieldNContribuinte.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNContribuinte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldNContribuinteActionPerformed(evt);
+                jTextFieldNContribuinteActionPerformed(evt);
+            }
+        });
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton4.setText("Procurar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -575,10 +646,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(226, 226, 226)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jFormattedTextFieldNContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton4)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -586,8 +660,10 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGap(136, 136, 136)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldNContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(147, Short.MAX_VALUE))
+                    .addComponent(jTextFieldNContribuinte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jButton4)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -616,14 +692,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -656,9 +732,17 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Telemovel:");
 
-        jFormattedTextFieldTelemovel2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldTelemovel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldTelemovel2ActionPerformed(evt);
+                jTextFieldTelemovelActionPerformed(evt);
+            }
+        });
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton5.setText("Procurar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -668,9 +752,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(218, 218, 218)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(jFormattedTextFieldTelemovel2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton5)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -679,8 +766,10 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGap(127, 127, 127)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldTelemovel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(198, Short.MAX_VALUE))
+                    .addComponent(jTextFieldTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(jButton5)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -716,7 +805,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -749,9 +838,17 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("IBAN:");
 
-        jFormattedTextFieldIBAN2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldIBAN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldIBAN2ActionPerformed(evt);
+                jTextFieldIBANActionPerformed(evt);
+            }
+        });
+
+        jButton6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton6.setText("Procurar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
             }
         });
 
@@ -761,10 +858,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(227, 227, 227)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jFormattedTextFieldIBAN2, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton6)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,8 +872,10 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGap(111, 111, 111)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jFormattedTextFieldIBAN2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(181, Short.MAX_VALUE))
+                    .addComponent(jTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(jButton6)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -802,14 +904,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -834,6 +936,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPesqSalario.setTitle("Pesquisar Salário");
         jDialogPesqSalario.setMinimumSize(new java.awt.Dimension(1074, 870));
 
         jPanel12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -847,15 +950,26 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
         });
 
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton7.setText("Procurar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(342, 342, 342)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldSalario2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton7)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldSalario2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(470, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -865,7 +979,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextFieldSalario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(jButton7)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         jPanel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -901,7 +1017,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -926,6 +1042,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPesqHora.setTitle("Pesquisar Horas");
         jDialogPesqHora.setMinimumSize(new java.awt.Dimension(1097, 875));
 
         jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -939,15 +1056,26 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton8.setText("Procurar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(393, 393, 393)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldHora2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton8)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldHora2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(482, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -957,7 +1085,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldHora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jButton8)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -1010,6 +1140,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jDialogPesqSalarioComBonus.setTitle("Pesquisar Salários Com Bonus");
         jDialogPesqSalarioComBonus.setMinimumSize(new java.awt.Dimension(930, 889));
 
         jPanel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -1023,15 +1154,26 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             }
         });
 
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton9.setText("Procurar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addGap(264, 264, 264)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldSalarioComBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton9)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldSalarioComBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(303, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
@@ -1041,7 +1183,9 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jTextFieldSalarioComBonus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jButton9)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         jPanel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -1108,36 +1252,64 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Salário entre");
+        jLabel9.setAutoscrolls(true);
+
+        jTextFieldMin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMinActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("e");
+        jLabel10.setAutoscrolls(true);
+
+        jTextFieldMax.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("Procurar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(273, 273, 273)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(355, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldMin, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldMax, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
+                .addGap(180, 180, 180))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
+                .addGap(152, 152, 152)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(172, Short.MAX_VALUE))
+                    .addComponent(jTextFieldMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jButton1)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         jPanel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -1166,7 +1338,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane10)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -1174,17 +1346,17 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDialogpPesqSalarioEntreDoisValoresLayout = new javax.swing.GroupLayout(jDialogpPesqSalarioEntreDoisValores.getContentPane());
         jDialogpPesqSalarioEntreDoisValores.getContentPane().setLayout(jDialogpPesqSalarioEntreDoisValoresLayout);
         jDialogpPesqSalarioEntreDoisValoresLayout.setHorizontalGroup(
             jDialogpPesqSalarioEntreDoisValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogpPesqSalarioEntreDoisValoresLayout.createSequentialGroup()
+            .addGroup(jDialogpPesqSalarioEntreDoisValoresLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDialogpPesqSalarioEntreDoisValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jDialogpPesqSalarioEntreDoisValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1204,24 +1376,21 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setMinimumSize(new java.awt.Dimension(923, 686));
+        jPanel1.setNextFocusableComponent(jLabel1);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Supermercado.jpg"))); // NOI18N
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 919, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Aplicação");
@@ -1398,9 +1567,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_AtualizarActionPerformed
 
     private void jTextFieldPesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesqNomeActionPerformed
-        String nomep = jTextFieldPesqNome.getText();
-        String sql = "select * from Funcionarios where Nome like '" + nomep + "%'";
-        this.lerTabelaN(sql);
+       
     }//GEN-LAST:event_jTextFieldPesqNomeActionPerformed
 
     private void jMenuItemPesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqNomeActionPerformed
@@ -1415,21 +1582,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPesqEstatutoActionPerformed
 
     private void jComboBoxEstatuto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstatuto2ActionPerformed
-        String estatutop = jComboBoxEstatuto2.getSelectedItem().toString();
-        String sql = "select Nome, Estatuto from Funcionarios where Estatuto like '" + estatutop + "%'";
-        this.lerTabelaEstatuto(sql);
+        
     }//GEN-LAST:event_jComboBoxEstatuto2ActionPerformed
 
     private void jMenuItemPesquisaContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisaContribuinteActionPerformed
         this.lerDadosTabelaPsqNumContribuinte();
         jDialogPesquisaNumContribuinte.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesquisaContribuinteActionPerformed
-
-    private void jFormattedTextFieldNContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNContribuinteActionPerformed
-        String contribuintep = jFormattedTextFieldNContribuinte.getText();
-        String sql = "select Nome, Contribuinte from Funcionarios where Contribuinte like '" + contribuintep + "%'";
-        lerTabelaNumContribuinte(sql);
-    }//GEN-LAST:event_jFormattedTextFieldNContribuinteActionPerformed
 
     private void jFormattedTextFieldNumContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNumContribuinteActionPerformed
        
@@ -1440,22 +1599,10 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         jDialogPesqTelemovel.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesqTelemovelActionPerformed
 
-    private void jFormattedTextFieldTelemovel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldTelemovel2ActionPerformed
-        String telemovelp = jFormattedTextFieldTelemovel2.getText();
-        String sql = "select Nome, Telemovel from Funcionarios where Telemovel like '" + telemovelp + "%'";
-        lerTabelaTelemovel(sql);
-    }//GEN-LAST:event_jFormattedTextFieldTelemovel2ActionPerformed
-
     private void jMenuItemPesqIBANActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqIBANActionPerformed
         lerDadosTabelaPsqIBAN();
         jDialogPesqIBAN.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesqIBANActionPerformed
-
-    private void jFormattedTextFieldIBAN2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldIBAN2ActionPerformed
-        String ibanp = jFormattedTextFieldIBAN2.getText();
-        String sql = "select Nome, IBAN from Funcionarios where IBAN like '" + ibanp + "%'";
-        lerTabelaIBAN(sql);
-    }//GEN-LAST:event_jFormattedTextFieldIBAN2ActionPerformed
 
     private void jMenuItemPesqSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesqSalarioActionPerformed
         lerDadosTabelaPsqSalario();
@@ -1463,15 +1610,11 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPesqSalarioActionPerformed
 
     private void jTextFieldSalario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSalario2ActionPerformed
-        String salariop = jTextFieldSalario2.getText();
-        String sql = "select Nome, Salário from Funcionarios where Salário like '" + salariop + "%'";
-        lerTabelaSalrio(sql);
+        
     }//GEN-LAST:event_jTextFieldSalario2ActionPerformed
 
     private void jTextFieldHora2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHora2ActionPerformed
-        String horap = jTextFieldHora2.getText();
-        String sql = "select Nome, Horas from Funcionarios where Horas like '" + horap + "%'";
-        lerTabelaHoras(sql);
+        
     }//GEN-LAST:event_jTextFieldHora2ActionPerformed
 
     private void jMenuItempPesqHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItempPesqHorasActionPerformed
@@ -1490,10 +1633,77 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPesqSalarioComBonusActionPerformed
 
     private void jTextFieldSalarioComBonusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSalarioComBonusActionPerformed
-        String salariobp = jTextFieldSalarioComBonus.getText();
-        String sql = "select Nome, Bonus from Funcionarios where Bonus like '" + salariobp + "%'";
-        lerTabelaSalrioComBonus(sql);
+        
     }//GEN-LAST:event_jTextFieldSalarioComBonusActionPerformed
+
+    private void jTextFieldIBANActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIBANActionPerformed
+        
+    }//GEN-LAST:event_jTextFieldIBANActionPerformed
+
+    private void jTextFieldNContribuinteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNContribuinteActionPerformed
+        
+    }//GEN-LAST:event_jTextFieldNContribuinteActionPerformed
+
+    private void jTextFieldTelemovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTelemovelActionPerformed
+        
+    }//GEN-LAST:event_jTextFieldTelemovelActionPerformed
+
+    private void jTextFieldMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMinActionPerformed
+//        double salariomin = Double.parseDouble(jTextFieldMax.getText());
+//        double salariomax = Double.parseDouble(jTextFieldMin.getText());
+//        String sql = "select Nome, Salario from Funcionarios ";
+//        salariosEntreDoisValores(sql);
+    }//GEN-LAST:event_jTextFieldMinActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       String sql = "select Nome, Salário from Funcionarios ";
+       salariosEntreDoisValores(sql);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String sql = "select * from Funcionarios";
+        this.lerTabelaN(sql);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String sql = "select Nome, Estatuto from Funcionarios" ;
+        this.lerTabelaEstatuto(sql);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String sql = "select Nome, Contribuinte from Funcionarios";
+        lerTabelaNumContribuinte(sql);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String sql = "select Nome, Telemovel from Funcionarios" ;
+        lerTabelaTelemovel(sql);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String sql = "select Nome, IBAN from Funcionarios";
+        lerTabelaIBAN(sql);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        String sql = "select Nome, Salário from Funcionarios";
+        lerTabelaSalrio(sql);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String sql = "select Nome, Horas from Funcionarios";
+        lerTabelaHoras(sql);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        String sql = "select Nome, Bonus from Funcionarios";
+        lerTabelaSalarioComBonus(sql);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jTextFieldNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNomeFocusLost
+        String nome = jTextFieldNome.getText();
+        verNome(nome);
+    }//GEN-LAST:event_jTextFieldNomeFocusLost
 
     private void lerEstatutosBDJComboBox() {
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
@@ -1548,13 +1758,21 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         try {
             con = DriverManager.getConnection(url);
             stmt = con.createStatement();
-            String nome = jTextFieldNome.getText();
+            String nome = "";
+//            boolean teste = false;
+//            do{
+                nome = jTextFieldNome.getText();
+//                teste = verNome(nome);
+//                jTextFieldNome.setText("");
+//            }while (!teste);
             String estatuto = jComboBoxEstatutos.getSelectedItem().toString();
             int ncontribuinte = Integer.parseInt(jFormattedTextFieldNumContribuinte.getText());
             int telemovel = Integer.parseInt(jFormattedTextFieldTelemovel.getText());
             String iban = jFormattedTextFieldIBAN.getText();
-            double salario = Double.parseDouble(jTextFieldSalario.getText());
-            double horas = Double.parseDouble(jTextFieldHoras.getText());
+            String salario = jTextFieldSalario.getText();
+            verSalrioEHoras(salario);
+            String horas = jTextFieldHoras.getText();
+            verSalrioEHoras(horas);
             double bonus = (bonusPorHora());
             stmt.executeUpdate("Insert into Funcionarios" + " values('" + nome + "','" + estatuto + "'," + ncontribuinte + "," + telemovel + ",'" + iban + "'," + salario + "," + horas + "," + bonus + ")");
 
@@ -1709,6 +1927,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     private void lerTabelaN(String sql) {
+        String nomep = jTextFieldPesqNome.getText();
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -1724,7 +1943,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery(sql);
             DefaultTableModel modelo = (DefaultTableModel) jTablePesqNome.getModel();
             modelo.setRowCount(0);
-            while (rs.next()) {
+            while (rs.next()) { 
                 String nome = rs.getString("Nome");
                 String estatuto = rs.getString("Estatuto");
                 String ncontribuinte = rs.getString("Contribuinte");
@@ -1733,6 +1952,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                 String salario = rs.getString("Salário");
                 String horas = rs.getString("Horas");
                 double bonus = rs.getDouble("Bonus");
+                if(nome.equals(nomep)){
                 Object[] dados = {
                     nome,
                     estatuto,
@@ -1744,6 +1964,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
                     bonus
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -1817,6 +2038,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     private void lerTabelaEstatuto(String sql) {
+        String estatutop = jComboBoxEstatuto2.getSelectedItem().toString();
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -1837,12 +2059,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             while (rs.next()) {
                 String estatuto = rs.getString("Estatuto");
                 String nome = rs.getString("Nome");
-
+                if(estatuto.equals(estatutop)){
                 Object[] dados = {
                     estatuto,
                     nome
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -1890,6 +2113,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     private void lerTabelaNumContribuinte(String sql) {
+        String contribuintep = jTextFieldNContribuinte.getText();
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -1906,14 +2130,15 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             DefaultTableModel modelo = (DefaultTableModel) jTableNContribuinte.getModel();
             modelo.setRowCount(0);
             while (rs.next()) {
-                String ncontribuinte = rs.getString("Contribuinte");
                 String nome = rs.getString("Nome");
-
+                String ncontribuinte = rs.getString("Contribuinte");
+                if(contribuintep.equals(ncontribuinte)){
                 Object[] dados = {
                     nome,
                     ncontribuinte
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -1922,7 +2147,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
 
-     public void lerDadosTabelaPsqTelemovel() {
+    public void lerDadosTabelaPsqTelemovel() {
         DefaultTableModel modelo = (DefaultTableModel) jTableTelemovel.getModel();
         modelo.setRowCount(0);
 
@@ -1959,6 +2184,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     private void lerTabelaTelemovel(String sql) {
+        String telemovelp = jTextFieldNContribuinte.getText();
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -1977,12 +2203,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             while (rs.next()) {
                 String nome = rs.getString("Nome");
                 String telemovel = rs.getString("Telemovel");
-                
-                Object[] dados = {
+                if(telemovel.equals(telemovelp)){
+                Object[] dados ={
                     nome,
                     telemovel
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -2028,6 +2255,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     private void lerTabelaIBAN(String sql) {
+        String ibanp = jTextFieldIBAN.getText();
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -2046,12 +2274,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             while (rs.next()) {
                 String nome = rs.getString("Nome");
                 String iban = rs.getString("IBAN");
-                
+                if(iban.equals(ibanp)){
                 Object[] dados = {
                     nome,
                     iban
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -2097,6 +2326,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     private void lerTabelaSalrio(String sql) {
+        double salariop =Double.parseDouble(jTextFieldSalario2.getText());
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -2114,13 +2344,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             modelo.setRowCount(0);
             while (rs.next()) {
                 String nome = rs.getString("Nome");
-                String salario = rs.getString("Salário");
-                
+                double salario = rs.getDouble("Salário");
+                if(salario==salariop){
                 Object[] dados = {
                     nome,
                     salario
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -2166,6 +2397,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     }
 
     private void lerTabelaHoras(String sql) {
+        double horap = Double.parseDouble(jTextFieldHora2.getText());
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -2183,13 +2415,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             modelo.setRowCount(0);
             while (rs.next()) {
                 String nome = rs.getString("Nome");
-                String hora = rs.getString("Horas");
-                
+                double hora = rs.getDouble("Horas");
+                if(hora==horap){
                 Object[] dados = {
                     nome,
                     hora
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -2234,7 +2467,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    private void lerTabelaSalrioComBonus(String sql) {
+    private void lerTabelaSalarioComBonus(String sql) {
+        double bonusp = Double.parseDouble(jTextFieldSalarioComBonus.getText());
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -2252,12 +2486,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             modelo.setRowCount(0);
             while (rs.next()) {
                 String nome = rs.getString("Nome");
-                String bonus = rs.getString("Bonus");
+                double bonus = rs.getDouble("Bonus");
+                if(bonus==bonusp){
                 Object[] dados = {
                     nome,
                     bonus
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -2265,7 +2501,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             System.err.println("SQLException: " + ex.getMessage());
         }
     }
-    
+  
     public void lerDadosTabelaPsqSalarios() {
         DefaultTableModel modelo = (DefaultTableModel) jTableSalario2.getModel();
         modelo.setRowCount(0);
@@ -2301,8 +2537,12 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             System.err.println("SQLException: " + ex.getMessage());
         }
     }
-
-    private void lerTabelaSalrios(String sql) {
+    
+    private void salariosEntreDoisValores(String sql){
+        
+        double salarioMin = Double.parseDouble(jTextFieldMin.getText());
+        double salarioMax = Double.parseDouble(jTextFieldMax.getText());
+        
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
         Connection con;
         Statement stmt;
@@ -2320,13 +2560,14 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
             modelo.setRowCount(0);
             while (rs.next()) {
                 String nome = rs.getString("Nome");
-                String salario = rs.getString("Salário");
-                
+                double salario = rs.getDouble("Salário");
+                if((salario>=salarioMin)&&(salario<=salarioMax)){
                 Object[] dados = {
                     nome,
                     salario
                 };
                 modelo.addRow(dados);
+                }
             }
             stmt.close();
             con.close();
@@ -2335,9 +2576,28 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
     
-    private double salariosEntreDoisValores(double salarioMin, double salarioMax){
-        
-        return 0;
+    private void verSalrioEHoras(String numeros){
+        String numeros1 = ("[0-9]+[.]");
+        numeros1 = numeros;
+        try {
+            Double.valueOf(numeros1);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane,"Erro, salário e horas mal introduzidas, só é aceite números e ponto!!","Erro!!",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private boolean verNome(String letras){
+        boolean valida = true;
+        for(int i =0;i<letras.length();i++){
+            Character letra = letras.charAt(i);
+            if (Character.isDigit(letra)){
+              JOptionPane.showMessageDialog(rootPane, "Erro, nome mal intoduzido!!", "Erro!!",JOptionPane.ERROR_MESSAGE );
+              jTextFieldNome.setText("");
+              valida = false;
+              break;
+            }
+        }
+        return valida;
     }
     
     /**
@@ -2377,6 +2637,15 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Atualizar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonInserir;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JComboBox<String> jComboBoxEstatuto2;
@@ -2394,11 +2663,8 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JDialog jDialogVerTabelaDeFuncionarios;
     private javax.swing.JDialog jDialogpPesqSalarioEntreDoisValores;
     private javax.swing.JFormattedTextField jFormattedTextFieldIBAN;
-    private javax.swing.JFormattedTextField jFormattedTextFieldIBAN2;
-    private javax.swing.JFormattedTextField jFormattedTextFieldNContribuinte;
     private javax.swing.JFormattedTextField jFormattedTextFieldNumContribuinte;
     private javax.swing.JFormattedTextField jFormattedTextFieldTelemovel;
-    private javax.swing.JFormattedTextField jFormattedTextFieldTelemovel2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2447,6 +2713,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2476,23 +2743,31 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
     private javax.swing.JTable jTableSalarioBonus;
     private javax.swing.JTable jTableTelemovel;
     private javax.swing.JTextArea jTextAreaOutput;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldHora2;
     private javax.swing.JTextField jTextFieldHoras;
+    private javax.swing.JTextField jTextFieldIBAN;
+    private javax.swing.JTextField jTextFieldMax;
+    private javax.swing.JTextField jTextFieldMin;
+    private javax.swing.JTextField jTextFieldNContribuinte;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPesqNome;
     private javax.swing.JTextField jTextFieldSalario;
     private javax.swing.JTextField jTextFieldSalario2;
     private javax.swing.JTextField jTextFieldSalarioComBonus;
+    private javax.swing.JTextField jTextFieldTelemovel;
     // End of variables declaration//GEN-END:variables
-    GestaoFuncionarios d = new GestaoFuncionarios();
-    Funcionarios fu;
+    
+    
+    
     MaskFormatter formatter1;
     MaskFormatter formatter2;
     MaskFormatter formatter3;
     MaskFormatter formatter4;
+    MaskFormatter formatter5;
+    MaskFormatter formatter6;
     private double bonusHora = 0;
     private double salarioTotal = 0;
-    ArrayList<Double> Func = new ArrayList<>();
+    
+    
+    
 }
