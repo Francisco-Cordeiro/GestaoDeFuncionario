@@ -1830,7 +1830,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    public void lerDadosTabela() {
+    private void lerDadosTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTableFuncionarios.getModel();
         modelo.setRowCount(0);
         String url = "jdbc:sqlite:DBGestaoDeFuncionarios.db";
@@ -1875,13 +1875,13 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    public double bonusPorHora() {
+    private double bonusPorHora() {
         bonusHora = 5.0 * (Double.parseDouble(jTextFieldHoras.getText()));
         salarioTotal = (Double.parseDouble(jTextFieldSalario.getText())) + bonusHora;
         return salarioTotal;
     }
 
-    public void lerDadosTabelaPsqNome() {
+    private void lerDadosTabelaPsqNome() {
         DefaultTableModel modelo = (DefaultTableModel) jTablePesqNome.getModel();
         modelo.setRowCount(0);
 
@@ -1976,7 +1976,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    public void lerDadosTabelaPsqEstatuto() {
+    private void lerDadosTabelaPsqEstatuto() {
         DefaultTableModel modelo = (DefaultTableModel) jTableEstatuto.getModel();
         modelo.setRowCount(0);
 
@@ -2079,7 +2079,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 
     }
 
-    public void lerDadosTabelaPsqNumContribuinte() {
+    private void lerDadosTabelaPsqNumContribuinte() {
         DefaultTableModel modelo = (DefaultTableModel) jTableNContribuinte.getModel();
         modelo.setRowCount(0);
 
@@ -2150,7 +2150,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
 
-    public void lerDadosTabelaPsqTelemovel() {
+    private void lerDadosTabelaPsqTelemovel() {
         DefaultTableModel modelo = (DefaultTableModel) jTableTelemovel.getModel();
         modelo.setRowCount(0);
 
@@ -2221,7 +2221,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
     
-    public void lerDadosTabelaPsqIBAN() {
+    private void lerDadosTabelaPsqIBAN() {
         DefaultTableModel modelo = (DefaultTableModel) jTableIBAN.getModel();
         modelo.setRowCount(0);
 
@@ -2292,7 +2292,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
     
-    public void lerDadosTabelaPsqSalario() {
+    private void lerDadosTabelaPsqSalario() {
         DefaultTableModel modelo = (DefaultTableModel) jTableSalario.getModel();
         modelo.setRowCount(0);
 
@@ -2363,7 +2363,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
     
-    public void lerDadosTabelaPsqHoras() {
+    private void lerDadosTabelaPsqHoras() {
         DefaultTableModel modelo = (DefaultTableModel) jTableHoras.getModel();
         modelo.setRowCount(0);
 
@@ -2434,7 +2434,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
     
-    public void lerDadosTabelaPsqSalarioComBonus() {
+    private void lerDadosTabelaPsqSalarioComBonus() {
         DefaultTableModel modelo = (DefaultTableModel) jTableSalarioBonus.getModel();
         modelo.setRowCount(0);
 
@@ -2505,7 +2505,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
   
-    public void lerDadosTabelaPsqSalarios() {
+    private void lerDadosTabelaPsqSalarios() {
         DefaultTableModel modelo = (DefaultTableModel) jTableSalario2.getModel();
         modelo.setRowCount(0);
 
