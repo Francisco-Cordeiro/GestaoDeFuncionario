@@ -1766,16 +1766,23 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
 //                jTextFieldNome.setText("");
 //            }while (!teste);
             String estatuto = jComboBoxEstatutos.getSelectedItem().toString();
-            int ncontribuinte = Integer.parseInt(jFormattedTextFieldNumContribuinte.getText());
-            int telemovel = Integer.parseInt(jFormattedTextFieldTelemovel.getText());
+            String ncontribuinte = jFormattedTextFieldNumContribuinte.getText();
+            String telemovel = jFormattedTextFieldTelemovel.getText();
             String iban = jFormattedTextFieldIBAN.getText();
             String salario = jTextFieldSalario.getText();
-            verSalrioEHoras(salario);
+            verSalarioEHoras(salario);
             String horas = jTextFieldHoras.getText();
-            verSalrioEHoras(horas);
+            verSalarioEHoras(horas);
             double bonus = (bonusPorHora());
+           
+            String nomeTabela = "Funcionarios";
+            ResultSet rs = stmt.executeQuery("select * from " + nomeTabela);
+            String contribuinte = rs.getString("Contribuinte");
+            if(!ncontribuinte.equals(contribuinte)){
             stmt.executeUpdate("Insert into Funcionarios" + " values('" + nome + "','" + estatuto + "'," + ncontribuinte + "," + telemovel + ",'" + iban + "'," + salario + "," + horas + "," + bonus + ")");
-
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Funcionario já introduzido!!", "Erro!!", JOptionPane.ERROR_MESSAGE);
+            }
             stmt.close();
             con.close();
 
@@ -2576,7 +2583,7 @@ public class AppGestaFuncionarios extends javax.swing.JFrame {
         }
     }
     
-    private void verSalrioEHoras(String numeros){
+    private void verSalarioEHoras(String numeros){
         String numeros1 = ("[0-9]+[.]");
         numeros1 = numeros;
         try {
